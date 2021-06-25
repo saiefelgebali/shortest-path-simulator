@@ -1,26 +1,24 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import SidebarContainer from "./components/SidebarContainer/SidebarContainer";
+import DiagramContainer from "./components/DiagramContainer/DiagramContainer";
+import MenubarContainer from "./components/MenubarContainer/MenubarContainer";
+import Layout from "./layout/Layout";
+import MenuLayout from "./layout/MenuLayout";
+import UserLayout from "./layout/UserLayout";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	return (
+		<Layout>
+			<MenuLayout>
+				<MenubarContainer></MenubarContainer>
+			</MenuLayout>
+
+			<UserLayout>
+				<SidebarContainer></SidebarContainer>
+				<DiagramContainer></DiagramContainer>
+				<SidebarContainer></SidebarContainer>
+			</UserLayout>
+		</Layout>
+	);
 }
 
 export default App;
