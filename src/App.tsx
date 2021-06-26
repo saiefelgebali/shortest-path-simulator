@@ -1,22 +1,16 @@
-import SidebarContainer from "./components/SidebarContainer/SidebarContainer";
-import DiagramContainer from "./components/DiagramContainer/DiagramContainer";
-import MenubarContainer from "./components/MenubarContainer/MenubarContainer";
 import Layout from "./layout/Layout";
-import MenuLayout from "./layout/MenuLayout";
-import UserLayout from "./layout/UserLayout";
+import SidebarContainer from "./components/SidebarContainer/SidebarContainer";
+import MenubarContainer from "./components/MenubarContainer/MenubarContainer";
+import DiagramView from "./components/DiagramView/DiagramView";
 
 function App() {
 	return (
 		<Layout>
-			<MenuLayout>
-				<MenubarContainer></MenubarContainer>
-			</MenuLayout>
+			<MenubarContainer></MenubarContainer>
 
-			<UserLayout>
-				<SidebarContainer></SidebarContainer>
-				<DiagramContainer></DiagramContainer>
-				<SidebarContainer></SidebarContainer>
-			</UserLayout>
+			<SidebarContainer></SidebarContainer>
+			<DiagramView />
+			<SidebarContainer></SidebarContainer>
 		</Layout>
 	);
 }
