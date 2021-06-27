@@ -1,14 +1,25 @@
 import DiagramNode from "../DiagramNode/DiagramNode";
 import { DiagramGrid } from "../DiagramGrid/DiagramGrid";
 import styles from "./Diagram.module.scss";
+import { Graph } from "../../algorithm/Graph";
 
-function Diagram() {
+type DiagramProps = {
+	graph: Graph;
+};
+
+function Diagram({ graph }: DiagramProps) {
+	const Nodes = () => (
+		<>
+			{graph.nodes.map((node, index) => (
+				<DiagramNode node={node} key={index} />
+			))}
+		</>
+	);
+
 	return (
 		<svg className={styles.diagram}>
 			<DiagramGrid />
-			<DiagramNode x={0} y={0} />
-			<DiagramNode x={400} y={200} />
-			<DiagramNode x={500} y={400} />
+			<Nodes />
 		</svg>
 	);
 }

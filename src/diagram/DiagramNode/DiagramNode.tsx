@@ -1,20 +1,18 @@
+import { GraphNode } from "../../algorithm/GraphNode";
 import styles from "./DiagramNode.module.scss";
 
 type DiagramNodeProps = {
-	x: number;
-	y: number;
+	node: GraphNode;
 };
 
 /**
  * Represents a graph node on the diagram
- * @prop {number} x - position on the x-axis
- * @prop {number} y - position on the y-axis
- * @returns
+ * @prop {GraphNode} node
  */
-function DiagramNode({ x, y }: DiagramNodeProps) {
+function DiagramNode({ node }: DiagramNodeProps) {
 	return (
-		<svg className={styles.node} x={x} y={y} width={80} height={80}>
-			<circle cx='50%' cy='50%' r={40} fill='black' />
+		<svg className={styles.node} x={200} y={200} width={80} height={80}>
+			<circle cx='50%' cy='50%' r={40} />
 			<text
 				x='50%'
 				y='50%'

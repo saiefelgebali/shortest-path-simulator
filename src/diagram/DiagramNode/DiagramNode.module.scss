@@ -1,7 +1,7 @@
 .node {
 	cursor: pointer;
+}
 
-	&.moving {
-		cursor: move;
-	}
+.node > circle {
+	fill: #7c90a0;
 }
