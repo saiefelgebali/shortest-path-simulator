@@ -1,10 +1,10 @@
 import DiagramNode from "../DiagramNode/DiagramNode";
 import { DiagramGrid } from "../DiagramGrid/DiagramGrid";
-import styles from "./Diagram.module.scss";
+import styles from "./DiagramView.module.scss";
 import { useContext } from "react";
-import { Store } from "../../store/store";
+import { Store } from "../../../store/store";
 
-function Diagram() {
+function DiagramView() {
 	const { state } = useContext(Store);
 
 	const Nodes = () => (
@@ -23,4 +23,4 @@ function Diagram() {
 	);
 }
 
-export default Diagram;
+export default DiagramView;

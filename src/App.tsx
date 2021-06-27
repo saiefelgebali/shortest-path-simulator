@@ -1,6 +1,6 @@
-import SidebarContainer from "./components/SidebarContainer/SidebarContainer";
-import MenubarContainer from "./components/MenubarContainer/MenubarContainer";
-import DiagramView from "./components/DiagramView/DiagramView";
+import SidebarContainer from "./components/Sidebar/SidebarContainer/SidebarContainer";
+import MenubarContainer from "./components/Menu/MenubarContainer/MenubarContainer";
+import Diagram from "./components/Diagram/Diagram/Diagram";
 import styles from "./App.module.scss";
 
 function App() {
@@ -8,7 +8,7 @@ function App() {
 		<div className={styles.appLayout}>
 			<MenubarContainer></MenubarContainer>
 			<SidebarContainer></SidebarContainer>
-			<DiagramView />
+			<Diagram />
 			<SidebarContainer></SidebarContainer>
 		</div>
 	);
