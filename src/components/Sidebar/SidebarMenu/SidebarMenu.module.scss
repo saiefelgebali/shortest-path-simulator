@@ -1,0 +1,63 @@
+.sidebarMenu {
+	display: flex;
+	flex-direction: column;
+	margin: 1rem;
+
+	> * {
+		margin-bottom: 1.2rem;
+		&:last-child {
+			margin-bottom: 0rem;
+		}
+	}
+
+	.menuTitle {
+		font-size: 1.6rem;
+		overflow: hidden;
+		white-space: nowrap;
+		text-overflow: ellipsis;
+		margin-bottom: 1rem;
+	}
+
+	form {
+		width: 100%;
+		> * {
+			margin-bottom: 1.2rem;
+			&:last-child {
+				margin-bottom: 0rem;
+			}
+		}
+	}
+
+	input {
+		display: block;
+		font-size: 1.2rem;
+		background-color: transparent;
+		padding: 0.2rem 0rem;
+		width: 100%;
+		border-bottom: 2px solid transparent;
+		transition: border-bottom ease-out 0.2s;
+
+		&::placeholder {
+			color: rgb(110, 110, 110);
+			opacity: 0.8;
+		}
+
+		&:focus {
+			border-bottom: 2px solid var(--primary);
+		}
+	}
+
+	button {
+		cursor: pointer;
+		background-color: var(--primary);
+		color: white;
+		width: 100%;
+		border: none;
+		padding: 0.5rem 1rem;
+		border-radius: 0.5rem;
+
+		&:active {
+			transform: translateY(4px);
+		}
+	}
+}

@@ -1,8 +1,11 @@
-import React from "react";
 import styles from "./SidebarContainer.module.scss";
 
-function SidebarContainer() {
-	return <div className={styles.container}></div>;
+type SidebarContainerProps = {
+	children?: JSX.Element | JSX.Element[];
+};
+
+function SidebarContainer({ children }: SidebarContainerProps) {
+	return <div className={styles.container}>{children}</div>;
 }
 
 export default SidebarContainer;
