@@ -1,5 +1,5 @@
-import DiagramContainer from "../DiagramContainer/DiagramContainer";
-import Diagram from "../Diagram/Diagram";
+import DiagramContainer from "../../diagram/DiagramContainer/DiagramContainer";
+import Diagram from "../../diagram/Diagram/Diagram";
 
 function DiagramView() {
 	return (

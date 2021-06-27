@@ -1,0 +1,7 @@
+.node {
+	cursor: pointer;
+
+	&.moving {
+		cursor: move;
+	}
+}

@@ -1,4 +1,4 @@
-export const Grid = () => {
+export const DiagramGrid = () => {
 	const cellSize = 200;
 	const smallCellSize = cellSize / 10;
 
