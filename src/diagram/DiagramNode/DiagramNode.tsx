@@ -1,4 +1,4 @@
-import { GraphNode } from "../../algorithm/GraphNode";
+import { GraphNode } from "../../graph/GraphNode";
 import styles from "./DiagramNode.module.scss";
 
 type DiagramNodeProps = {

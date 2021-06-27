@@ -11,16 +11,17 @@ export class Graph {
 	/**
 	 * Create a new node in graph
 	 */
-	addNode(name: string) {
-		const node = new GraphNode(name);
+	addNode(node: GraphNode) {
 		this.nodes.push(node);
+		return this;
 	}
 
 	/**
 	 * Create a new edge between 2 nodes
 	 */
-	addEdge(fromNode: GraphNode, toNode: GraphNode, weight: number) {
-		const edge = fromNode.addEdge(toNode, weight);
+	addEdge(edge: GraphEdge) {
+		edge.fromNode.addEdge(edge.toNode, edge.weight);
 		this.edges.push(edge);
+		return this;
 	}
 }

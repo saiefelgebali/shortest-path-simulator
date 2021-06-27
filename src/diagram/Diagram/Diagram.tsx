@@ -1,16 +1,15 @@
 import DiagramNode from "../DiagramNode/DiagramNode";
 import { DiagramGrid } from "../DiagramGrid/DiagramGrid";
 import styles from "./Diagram.module.scss";
-import { Graph } from "../../algorithm/Graph";
+import { useContext } from "react";
+import { Store } from "../../store/store";
 
-type DiagramProps = {
-	graph: Graph;
-};
+function Diagram() {
+	const { state } = useContext(Store);
 
-function Diagram({ graph }: DiagramProps) {
 	const Nodes = () => (
 		<>
-			{graph.nodes.map((node, index) => (
+			{state.graph.nodes.map((node, index) => (
 				<DiagramNode node={node} key={index} />
 			))}
 		</>
