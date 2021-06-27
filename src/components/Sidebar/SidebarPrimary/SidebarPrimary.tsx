@@ -2,7 +2,7 @@ import { useState } from "react";
 import SidebarContainer from "../SidebarContainer/SidebarContainer";
 import SidebarMenu from "../SidebarMenu/SidebarMenu";
 import SidebarMenuSwitcher from "../SidebarMenu/SidebarMenuSwitcher";
-import SidebarMenuOption from "../SidebarMenu/SidebarMenuOption";
+import SidebarMenuSwitcherOption from "../SidebarMenu/SidebarMenuSwitcherOption";
 import styles from "./SidebarPrimary.module.scss";
 
 enum Menu {
@@ -10,6 +10,9 @@ enum Menu {
 	createEdge = "CREATE_EDGE",
 }
 
+/**
+ * Give user options to add items to the graph
+ */
 function SidebarPrimary() {
 	const [menu, setMenu] = useState<Menu>(Menu.createNode);
 
@@ -37,6 +40,9 @@ function SidebarPrimary() {
 		</SidebarMenu>
 	);
 
+	/**
+	 * Show currently selected menu
+	 */
 	const CurrentMenu = () => {
 		switch (menu) {
 			case Menu.createNode:
@@ -48,14 +54,14 @@ function SidebarPrimary() {
 
 	return (
 		<SidebarContainer>
-			<SidebarMenuSwitcher menu={menu} setMenu={setMenu}>
-				<SidebarMenuOption
+			<SidebarMenuSwitcher>
+				<SidebarMenuSwitcherOption
 					menu={Menu.createNode}
 					currentMenu={menu}
-					title='Create Node'
+					title='Add Node'
 					setMenu={setMenu}
 				/>
-				<SidebarMenuOption
+				<SidebarMenuSwitcherOption
 					menu={Menu.createEdge}
 					currentMenu={menu}
 					title='Create Edge'

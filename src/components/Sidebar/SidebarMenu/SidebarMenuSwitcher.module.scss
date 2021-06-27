@@ -1,3 +1,19 @@
 .sidebarMenuSwitcher {
 	display: flex;
+	flex-wrap: wrap;
+	padding: 1rem;
+	gap: 1rem;
+
+	.option {
+		cursor: pointer;
+		border-radius: 0.5rem;
+		padding: 0.5rem;
+		color: white;
+		background-color: var(--secondary);
+		transition: background-color ease 0.1s;
+
+		&.isActive {
+			background-color: var(--primary);
+		}
+	}
 }

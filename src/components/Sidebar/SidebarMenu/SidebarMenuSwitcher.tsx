@@ -1,10 +1,8 @@
 import React from "react";
-import styles from "./SidebarMenu.module.scss";
+import styles from "./SidebarMenuSwitcher.module.scss";
 
 type SidebarMenuSwitcherProps = {
 	children?: JSX.Element[];
-	menu: string;
-	setMenu: React.Dispatch<React.SetStateAction<any>>;
 };
 
 function SidebarMenuSwitcher({ children }: SidebarMenuSwitcherProps) {

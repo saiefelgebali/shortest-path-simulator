@@ -1,19 +1,19 @@
 import React from "react";
 import styles from "./SidebarMenuSwitcher.module.scss";
 
-type SidebarMenuOptionProps = {
+type SidebarMenuSwitcherOptionProps = {
 	menu: string;
 	currentMenu: string;
 	title: string;
 	setMenu: React.Dispatch<React.SetStateAction<any>>;
 };
 
-function SidebarMenuOption({
+function SidebarMenuSwitcherOption({
 	menu,
 	currentMenu,
 	title,
 	setMenu,
-}: SidebarMenuOptionProps) {
+}: SidebarMenuSwitcherOptionProps) {
 	/**
 	 * Fires on click option
 	 */
@@ -26,7 +26,7 @@ function SidebarMenuOption({
 	 */
 	const isActive = () => (menu === currentMenu ? styles.isActive : null);
 
-	const className = `${styles.sidebarMenuOption} ${isActive()}`;
+	const className = `${styles.option} ${isActive()}`;
 
 	return (
 		<div className={className} onClick={onClick}>
@@ -35,4 +35,4 @@ function SidebarMenuOption({
 	);
 }
 
-export default SidebarMenuOption;
+export default SidebarMenuSwitcherOption;
