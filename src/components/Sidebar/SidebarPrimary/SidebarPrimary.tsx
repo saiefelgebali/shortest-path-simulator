@@ -1,4 +1,7 @@
-import { useState } from "react";
+import React, { useState, useContext } from "react";
+import { GraphNode } from "../../../graph/GraphNode";
+import { addNode } from "../../../store/actions";
+import { Store } from "../../../store/store";
 import SidebarContainer from "../SidebarContainer/SidebarContainer";
 import SidebarMenu from "../SidebarMenu/SidebarMenu";
 import SidebarMenuSwitcher from "../SidebarMenu/SidebarMenuSwitcher";
@@ -14,14 +17,38 @@ enum Menu {
  * Give user options to add items to the graph
  */
 function SidebarPrimary() {
+	const { state, dispatch } = useContext(Store);
+
+	// Current menu state
 	const [menu, setMenu] = useState<Menu>(Menu.createNode);
+
+	function handleSubmitCreateNode(event: React.FormEvent) {
+		event.preventDefault();
+		if (!state.graph) return;
+
+		// @ts-ignore
+		const name = event.currentTarget.name.value;
+		// @ts-ignore
+		const id = event.currentTarget.id.value;
+
+		const node = new GraphNode(name, id);
+
+		// Update graph
+		addNode(dispatch, state.graph, node);
+	}
 
 	const CreateNodeMenu = () => (
 		<SidebarMenu title='Create Node'>
-			<form>
-				<input type='text' placeholder='Name' maxLength={24} />
+			<form onSubmit={handleSubmitCreateNode}>
 				<input
 					type='text'
+					name='name'
+					maxLength={24}
+					placeholder='Name'
+				/>
+				<input
+					type='text'
+					name='id'
 					placeholder='ID'
 					maxLength={3}
 					className={styles.idInput}

@@ -7,13 +7,15 @@ import { Store } from "../../../store/store";
 function DiagramView() {
 	const { state } = useContext(Store);
 
-	const Nodes = () => (
-		<>
-			{state.graph.nodes.map((node, index) => (
-				<DiagramNode node={node} key={index} />
-			))}
-		</>
-	);
+	const Nodes = () => {
+		return (
+			<>
+				{state.graph?.nodes.map((node, index) => (
+					<DiagramNode node={node} key={index} />
+				))}
+			</>
+		);
+	};
 
 	return (
 		<svg className={styles.diagram}>

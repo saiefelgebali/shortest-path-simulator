@@ -19,7 +19,7 @@ type StoreProviderProps = {
 
 export function StoreProvider({ children }: StoreProviderProps) {
 	const initialState: AppState = {
-		graph: new Graph().addNode(new GraphNode("Cambridge")),
+		graph: new Graph().addNode(new GraphNode("Cambridge", "CB")),
 	};
 
 	const [state, dispatch] = useReducer(reducer, initialState);

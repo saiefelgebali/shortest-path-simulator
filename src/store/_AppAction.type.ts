@@ -7,5 +7,5 @@ export enum ActionType {
 
 export type AppAction = {
 	type: ActionType;
-	graph?: Graph;
+	graph: Graph;
 };

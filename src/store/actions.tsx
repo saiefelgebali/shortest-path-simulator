@@ -13,6 +13,16 @@ export function addNode(
 	return dispatch({ type: ActionType.addNode, graph });
 }
 
+export function moveNode(
+	dispatch: React.Dispatch<AppAction>,
+	graph: Graph,
+	node: GraphNode,
+	{ x, y }: { x: number; y: number }
+) {
+	node.moveNode(x, y);
+	return dispatch({ type: ActionType.addNode, graph });
+}
+
 export function addEdge(
 	dispatch: React.Dispatch<AppAction>,
 	graph: Graph,

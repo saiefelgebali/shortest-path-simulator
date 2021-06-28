@@ -5,14 +5,18 @@ import { GraphEdge } from "./GraphEdge";
  */
 export class GraphNode {
 	name: string;
+	id: string;
 	edges: GraphEdge[] = [];
+	position: { x: number; y: number } = { x: 200, y: 200 };
 
 	/**
 	 * Create a new node with name
 	 * @param name name of node
+	 * @param id short name of node
 	 */
-	constructor(name: string) {
+	constructor(name: string, id: string) {
 		this.name = name;
+		this.id = id.toUpperCase();
 	}
 
 	/**
@@ -25,5 +29,24 @@ export class GraphNode {
 		const edge = new GraphEdge(this, toNode, weight);
 		this.edges.push(edge);
 		return edge;
+	}
+
+	/**
+	 * Move node to new position
+	 * @param x
+	 * @param y
+	 */
+	moveNode(x: number, y: number) {
+		this.position = { x, y };
+	}
+
+	/**
+	 * Move node to new position
+	 * @param dx
+	 * @param dy
+	 */
+	moveBy(dx: number, dy: number) {
+		const { x, y } = this.position;
+		this.position = { x: x + dx, y: y + dy };
 	}
 }

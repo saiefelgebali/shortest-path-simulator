@@ -1,5 +1,9 @@
 .node {
 	cursor: pointer;
+
+	&.isDragging {
+		cursor: move;
+	}
 }
 
 .node > circle {
