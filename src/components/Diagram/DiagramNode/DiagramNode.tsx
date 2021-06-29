@@ -33,17 +33,31 @@ function DiagramNode({ node }: DiagramNodeProps) {
 	}
 
 	// Fired while dragging
-	function onDragMove(event: React.PointerEvent) {
-		setTranslate({
-			x: translate.x + event.movementX,
-			y: translate.y + event.movementY,
+	function onDragMove(
+		event: PointerEvent,
+		initialPosition?: { x: number; y: number },
+		snapToGrid?: Function
+	) {
+		if (!initialPosition) return;
+		if (!snapToGrid) return;
+
+		// Get difference in position
+		const dx = event.pageX - initialPosition.x;
+		const dy = event.pageY - initialPosition.y;
+
+		const { x, y } = snapToGrid({
+			x: node.position.x + dx,
+			y: node.position.y + dy,
 		});
+
+		setTranslate({ x, y });
 	}
 
 	const className = `${styles.node} ${isDragging ? styles.isDragging : null}`;
 
 	return (
 		<DiagramDragMove
+			snap={50}
 			onDragMove={onDragMove}
 			onPointerDown={onPointerDown}
 			onPointerUp={onPointerUp}>
@@ -51,9 +65,9 @@ function DiagramNode({ node }: DiagramNodeProps) {
 				className={className}
 				x={translate.x}
 				y={translate.y}
-				width={80}
-				height={80}>
-				<circle cx='50%' cy='50%' r={40} />
+				width={100}
+				height={100}>
+				<circle cx='50%' cy='50%' r={50} />
 				<text
 					x='50%'
 					y='50%'
