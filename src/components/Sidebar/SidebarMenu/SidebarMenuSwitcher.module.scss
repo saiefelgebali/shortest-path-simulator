@@ -1,13 +1,18 @@
 .sidebarMenuSwitcher {
-	display: flex;
-	flex-wrap: wrap;
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr;
 	padding: 1rem;
 	gap: 1rem;
 
 	.option {
+		display: flex;
+		justify-content: center;
+		align-items: center;
 		cursor: pointer;
 		border-radius: 0.5rem;
 		padding: 0.5rem;
+		width: 2rem;
+		height: 2rem;
 		color: white;
 		background-color: var(--secondary);
 		transition: background-color ease 0.1s;

@@ -57,7 +57,7 @@ function DiagramNode({ node }: DiagramNodeProps) {
 
 	return (
 		<DiagramDragMove
-			snap={50}
+			snap={5}
 			onDragMove={onDragMove}
 			onPointerDown={onPointerDown}
 			onPointerUp={onPointerUp}>

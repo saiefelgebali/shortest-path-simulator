@@ -1,17 +1,18 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import styles from "./SidebarMenuSwitcher.module.scss";
 
 type SidebarMenuSwitcherOptionProps = {
 	menu: string;
 	currentMenu: string;
-	title: string;
+	icon: any;
 	setMenu: React.Dispatch<React.SetStateAction<any>>;
 };
 
 function SidebarMenuSwitcherOption({
 	menu,
 	currentMenu,
-	title,
+	icon,
 	setMenu,
 }: SidebarMenuSwitcherOptionProps) {
 	/**
@@ -30,7 +31,7 @@ function SidebarMenuSwitcherOption({
 
 	return (
 		<div className={className} onClick={onClick}>
-			{title}
+			<FontAwesomeIcon icon={icon} />
 		</div>
 	);
 }

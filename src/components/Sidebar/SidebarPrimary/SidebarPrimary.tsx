@@ -1,3 +1,8 @@
+import {
+	faArrowsAlt,
+	faLink,
+	faMapMarkerAlt,
+} from "@fortawesome/free-solid-svg-icons";
 import React, { useState, useContext } from "react";
 import { GraphNode } from "../../../graph/GraphNode";
 import { addNode } from "../../../store/actions";
@@ -11,6 +16,7 @@ import styles from "./SidebarPrimary.module.scss";
 enum Menu {
 	createNode = "CREATE_NODE",
 	createEdge = "CREATE_EDGE",
+	moveNode = "MOVE_NODE",
 }
 
 /**
@@ -67,6 +73,32 @@ function SidebarPrimary() {
 		</SidebarMenu>
 	);
 
+	const MoveNodeMenu = () => {
+		return (
+			<SidebarMenu title='Move Node'>
+				<form>
+					<label htmlFor='snap'>Snap to grid</label>
+					<input
+						type='range'
+						name='snap'
+						min={0}
+						max={200}
+						step={5}
+						list='snapRangeList'
+					/>
+					<datalist id='snapRangeList'>
+						<option value={0}></option>
+						<option value={50}></option>
+						<option value={100}></option>
+						<option value={150} label='150'></option>
+						<option value={200}></option>
+					</datalist>
+					<div>Click and drag nodes to rearrange them!</div>
+				</form>
+			</SidebarMenu>
+		);
+	};
+
 	/**
 	 * Show currently selected menu
 	 */
@@ -76,6 +108,8 @@ function SidebarPrimary() {
 				return <CreateNodeMenu />;
 			case Menu.createEdge:
 				return <CreateEdgeMenu />;
+			case Menu.moveNode:
+				return <MoveNodeMenu />;
 		}
 	};
 
@@ -85,13 +119,19 @@ function SidebarPrimary() {
 				<SidebarMenuSwitcherOption
 					menu={Menu.createNode}
 					currentMenu={menu}
-					title='Add Node'
+					icon={faMapMarkerAlt}
 					setMenu={setMenu}
 				/>
 				<SidebarMenuSwitcherOption
 					menu={Menu.createEdge}
 					currentMenu={menu}
-					title='Create Edge'
+					icon={faLink}
+					setMenu={setMenu}
+				/>
+				<SidebarMenuSwitcherOption
+					menu={Menu.moveNode}
+					currentMenu={menu}
+					icon={faArrowsAlt}
 					setMenu={setMenu}
 				/>
 			</SidebarMenuSwitcher>
