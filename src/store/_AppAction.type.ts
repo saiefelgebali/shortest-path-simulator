@@ -1,11 +1,12 @@
 import { Graph } from "../graph/Graph";
+import { GraphNode } from "../graph/GraphNode";
 
 export enum ActionType {
 	addNode,
 	addEdge,
+	moveNode,
 }
 
-export type AppAction = {
+export interface AppAction {
 	type: ActionType;
-	graph: Graph;
-};
+}

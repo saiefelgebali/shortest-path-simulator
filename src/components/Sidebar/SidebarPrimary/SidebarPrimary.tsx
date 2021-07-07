@@ -40,7 +40,7 @@ function SidebarPrimary() {
 		const node = new GraphNode(name, id);
 
 		// Update graph
-		addNode(dispatch, state.graph, node);
+		addNode(dispatch, node);
 	}
 
 	const CreateNodeMenu = () => (

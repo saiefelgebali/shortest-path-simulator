@@ -24,4 +24,9 @@ export class Graph {
 		this.edges.push(edge);
 		return this;
 	}
+
+	/**
+	 * Applies Dijkstra's algorithm
+	 */
+	findShortestPath(start: GraphNode, end: GraphNode) {}
 }

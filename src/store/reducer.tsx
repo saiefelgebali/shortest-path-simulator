@@ -1,12 +1,19 @@
-import { ActionType, AppAction } from "./_AppAction.type";
+import { ActionType } from "./_AppAction.type";
 import { AppState } from "./_AppState.type";
 
-export function reducer(state: AppState, action: AppAction) {
+export function reducer(state: AppState, action: any) {
 	switch (action.type) {
 		case ActionType.addNode:
-			return { graph: action.graph };
+			state.graph.addNode(action.node);
+			return { ...state };
+
 		case ActionType.addEdge:
-			return state;
+			state.graph.addEdge(action.edge);
+			return { ...state };
+
+		case ActionType.moveNode:
+			return { ...state };
+
 		default:
 			return state;
 	}
