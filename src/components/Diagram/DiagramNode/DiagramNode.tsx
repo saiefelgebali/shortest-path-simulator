@@ -1,5 +1,4 @@
 import React, { useContext } from "react";
-import { useState } from "react";
 import { GraphNode } from "../../../graph/GraphNode";
 import { moveNode } from "../../../store/actions";
 import { Store } from "../../../store/store";
@@ -26,16 +25,8 @@ function DiagramNode({ node, radius }: DiagramNodeProps) {
 		moveNode(dispatch, node, { x: event.offsetX, y: event.offsetY });
 	}
 
-	const className = `${styles.node} ${styles.isDragging}`;
-
 	return (
-		<Element onDrag={onDragMove}>
-			{/* <svg
-				className={className}
-				x={node.position.x - r}
-				y={node.position.y - r}
-				width={r * 2 + 16}
-				height={r * 2 + 16}> */}
+		<Element className={styles.node} onDrag={onDragMove}>
 			<circle cx={node.position.x} cy={node.position.y} r={r} />
 			<text
 				x={node.position.x}
@@ -47,7 +38,6 @@ function DiagramNode({ node, radius }: DiagramNodeProps) {
 				dy='8px'>
 				{node.id}
 			</text>
-			{/* </svg> */}
 		</Element>
 	);
 }

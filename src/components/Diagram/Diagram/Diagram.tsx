@@ -1,5 +1,4 @@
-import { View, Element } from "@saiefelgebali/react-diagrams";
-import { stat } from "fs";
+import { View } from "@saiefelgebali/react-diagrams";
 import { useContext } from "react";
 import { Store } from "../../../store/store";
 import DiagramEdge from "../DiagramEdge/DiagramEdge";
@@ -18,7 +17,7 @@ function Diagram() {
 
 	const Edges = () =>
 		state.graph.edges.map((edge, index) => (
-			<DiagramEdge edge={edge} radius={radius} key={index} />
+			<DiagramEdge edge={edge} key={index} />
 		));
 
 	return (

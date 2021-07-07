@@ -3,28 +3,15 @@ import { GraphEdge } from "../../../graph/GraphEdge";
 
 type DiagramEdgeProps = {
 	edge: GraphEdge;
-	radius?: number;
 };
 
-function DiagramEdge({ edge, radius }: DiagramEdgeProps) {
-	const r = radius || 50;
-
-	// Get positions of centers of nodes using node side lengths
-	function getCentreOfNode({ x, y }: { x: number; y: number }) {
-		const cx = x;
-		const cy = y;
-		return { x: cx, y: cy };
-	}
-
-	const fromPosition = getCentreOfNode(edge.fromNode.position);
-	const toPosition = getCentreOfNode(edge.toNode.position);
-
+function DiagramEdge({ edge }: DiagramEdgeProps) {
 	return (
 		<line
-			x1={fromPosition.x}
-			y1={fromPosition.y}
-			x2={toPosition.x}
-			y2={toPosition.y}
+			x1={edge.fromNode.position.x}
+			y1={edge.fromNode.position.y}
+			x2={edge.toNode.position.x}
+			y2={edge.toNode.position.y}
 			stroke='black'
 		/>
 	);
