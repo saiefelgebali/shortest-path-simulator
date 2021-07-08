@@ -8,11 +8,9 @@ import styles from "./Diagram.module.scss";
 function Diagram() {
 	const { state } = useContext(Store);
 
-	const radius = 50;
-
 	const Nodes = () =>
 		state.graph.nodes.map((node, index) => (
-			<DiagramNode node={node} radius={radius} key={index} />
+			<DiagramNode node={node} key={index} />
 		));
 
 	const Edges = () =>

@@ -7,22 +7,27 @@ import { Element } from "@saiefelgebali/react-diagrams";
 
 type DiagramNodeProps = {
 	node: GraphNode;
-	radius?: number;
 };
 
 /**
  * Represents a graph node on the diagram
  * @prop {GraphNode} node
  */
-function DiagramNode({ node, radius }: DiagramNodeProps) {
-	const r = radius || 50;
+function DiagramNode({ node }: DiagramNodeProps) {
+	// The radius of a node's circle
+	const r = 50;
 
 	// Handle app state
 	const { dispatch } = useContext(Store);
 
 	// Fired while dragging
 	function onDragMove(event: MouseEvent) {
-		moveNode(dispatch, node, { x: event.offsetX, y: event.offsetY });
+		// Snap to grid
+		const snap = 10;
+		moveNode(dispatch, node, {
+			x: Math.round(event.offsetX / snap) * snap,
+			y: Math.round(event.offsetY / snap) * snap,
+		});
 	}
 
 	return (
