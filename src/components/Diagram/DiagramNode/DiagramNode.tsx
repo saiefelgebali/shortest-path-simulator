@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
 import { GraphNode } from "../../../graph/GraphNode";
-import { moveNode } from "../../../store/actions";
-import { Store } from "../../../store/store";
 import styles from "./DiagramNode.module.scss";
 import { Element } from "@saiefelgebali/react-diagrams";
+import { GraphContext } from "../../../graph/context/graphContext";
+import { moveNode } from "../../../graph/context/graphActions";
 
 type DiagramNodeProps = {
 	node: GraphNode;
@@ -18,7 +18,7 @@ function DiagramNode({ node }: DiagramNodeProps) {
 	const r = 50;
 
 	// Handle app state
-	const { dispatch } = useContext(Store);
+	const { dispatch } = useContext(GraphContext);
 
 	// Fired while dragging
 	function onDragMove(event: MouseEvent) {

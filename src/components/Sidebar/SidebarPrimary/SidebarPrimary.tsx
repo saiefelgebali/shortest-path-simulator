@@ -4,9 +4,9 @@ import {
 	faMapMarkerAlt,
 } from "@fortawesome/free-solid-svg-icons";
 import React, { useState, useContext } from "react";
+import { addNode } from "../../../graph/context/graphActions";
+import { GraphContext } from "../../../graph/context/graphContext";
 import { GraphNode } from "../../../graph/GraphNode";
-import { addNode } from "../../../store/actions";
-import { Store } from "../../../store/store";
 import SidebarContainer from "../SidebarContainer/SidebarContainer";
 import SidebarMenu from "../SidebarMenu/SidebarMenu";
 import SidebarMenuSwitcher from "../SidebarMenu/SidebarMenuSwitcher";
@@ -23,21 +23,23 @@ enum Menu {
  * Give user options to add items to the graph
  */
 function SidebarPrimary() {
-	const { state, dispatch } = useContext(Store);
+	const { dispatch } = useContext(GraphContext);
 
 	// Current menu state
 	const [menu, setMenu] = useState<Menu>(Menu.createNode);
 
 	function handleSubmitCreateNode(event: React.FormEvent) {
 		event.preventDefault();
-		if (!state.graph) return;
 
-		// @ts-ignore
-		const name = event.currentTarget.name.value;
-		// @ts-ignore
-		const id = event.currentTarget.id.value;
+		const formData = new FormData(event.currentTarget as HTMLFormElement);
+
+		const name = formData.get("name") as string;
+		const id = formData.get("id") as string;
+
+		if (!name || !id) return;
 
 		const node = new GraphNode(name, id);
+		console.log(node);
 
 		// Update graph
 		addNode(dispatch, node);

@@ -33,20 +33,8 @@ export class GraphNode {
 
 	/**
 	 * Move node to new position
-	 * @param x
-	 * @param y
 	 */
-	moveNode(x: number, y: number) {
-		this.position = { x, y };
-	}
-
-	/**
-	 * Move node to new position
-	 * @param dx
-	 * @param dy
-	 */
-	moveBy(dx: number, dy: number) {
-		const { x, y } = this.position;
-		this.position = { x: x + dx, y: y + dy };
+	moveNode(newPosition: { x: number; y: number }) {
+		this.position = newPosition;
 	}
 }
