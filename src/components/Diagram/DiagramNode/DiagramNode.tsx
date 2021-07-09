@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
 import { GraphNode } from "../../../graph/GraphNode";
-import styles from "./DiagramNode.module.scss";
-import { Element } from "@saiefelgebali/react-diagrams";
+import { ElementContainer } from "@saiefelgebali/react-diagrams";
 import { GraphContext } from "../../../graph/context/graphContext";
 import { moveNode } from "../../../graph/context/graphActions";
+import styles from "./DiagramNode.module.scss";
 
 type DiagramNodeProps = {
 	node: GraphNode;
@@ -31,7 +31,10 @@ function DiagramNode({ node }: DiagramNodeProps) {
 	}
 
 	return (
-		<Element className={styles.node} onDrag={onDragMove}>
+		<ElementContainer
+			className={styles.node}
+			classNameDragging={styles.isDragging}
+			onDrag={onDragMove}>
 			<circle cx={node.position.x} cy={node.position.y} r={r} />
 			<text
 				x={node.position.x}
@@ -43,7 +46,7 @@ function DiagramNode({ node }: DiagramNodeProps) {
 				dy='8px'>
 				{node.id}
 			</text>
-		</Element>
+		</ElementContainer>
 	);
 }
 

@@ -1,4 +1,10 @@
 .node {
+	cursor: pointer;
+
+	&.isDragging {
+		cursor: move;
+	}
+
 	> circle {
 		fill: #7c90a0;
 		stroke: black;

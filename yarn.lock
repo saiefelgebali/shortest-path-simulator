@@ -1507,10 +1507,10 @@
     estree-walker "^1.0.1"
     picomatch "^2.2.2"
 
-"@saiefelgebali/react-diagrams@^0.4.0":
-  version "0.4.0"
-  resolved "https://registry.yarnpkg.com/@saiefelgebali/react-diagrams/-/react-diagrams-0.4.0.tgz#8ff308c9c86b8f7e5f14fe8bb2ddfce60fade515"
-  integrity sha512-M49K3KGHTgFupYaPspuS8xdNikaod8cZ4LsD0FGUgmmR48ulDQpJuvXZ1+N4ta3KS9XB0yXkhuj17ZpxJzZQ6A==
+"@saiefelgebali/react-diagrams@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@saiefelgebali/react-diagrams/-/react-diagrams-2.0.0.tgz#f689bd188c4d7632d8801dd9daa0844753e3a70d"
+  integrity sha512-juTuvMfCqkahj0TdIV3uepHEw18ztaDI538t0jpfCd3vBVB7pP1Pyer2Av1HGybng+FcuEnxtpPzg8O94YTmIg==
   dependencies:
     "@storybook/addon-postcss" "^2.0.0"
     "@testing-library/jest-dom" "^5.11.4"
@@ -1547,9 +1547,9 @@
     style-loader "^1.3.0"
 
 "@storybook/node-logger@^6.1.14":
-  version "6.3.3"
-  resolved "https://registry.yarnpkg.com/@storybook/node-logger/-/node-logger-6.3.3.tgz#e98ea1b545442b078280886878f4943397c806aa"
-  integrity sha512-YmH8jZok49HPHuG/fkKgYTrHd1jxwwjhyy/cJvzW+gr3V+4rTLv0EqVe45j2LEB8+9hEw6NyMTNzn9j1eEZvIg==
+  version "6.3.4"
+  resolved "https://registry.yarnpkg.com/@storybook/node-logger/-/node-logger-6.3.4.tgz#ab7bd9f78f9ff10c9d20439734de6882233a9a75"
+  integrity sha512-z65CCCQPbZcHKnofley15+dl8UfrJOeCi7M9c7AJQ0aGh7z1ofySNjwrAf3SO1YMn4K4dkRPDFFq0SY3LA1DLw==
   dependencies:
     "@types/npmlog" "^4.1.2"
     chalk "^4.1.0"
