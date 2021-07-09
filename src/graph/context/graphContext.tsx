@@ -1,5 +1,7 @@
 import React, { createContext, useReducer } from "react";
+import { useEffect } from "react";
 import { Graph, GraphNode, GraphEdge } from "../index";
+import ActionController from "./ActionController";
 import { GraphAction } from "./graphActions";
 import { graphReducer } from "./graphReducer";
 
@@ -25,6 +27,13 @@ type GraphContextProviderProps = {
 };
 
 export function GraphContextProvider({ children }: GraphContextProviderProps) {
+	useEffect(() => {
+		window.addEventListener("keydown", (event) => {
+			if (!(event.key === "z" && event.ctrlKey)) return;
+			ActionController.undo();
+		});
+	}, []);
+
 	const graph = new Graph();
 
 	const n1 = new GraphNode("CAMBRIDGE", "1");
@@ -37,7 +46,8 @@ export function GraphContextProvider({ children }: GraphContextProviderProps) {
 	const e2 = new GraphEdge(n1, n3, 20);
 	const e3 = new GraphEdge(n2, n4, 20);
 	const e4 = new GraphEdge(n3, n5, 20);
-	const e5 = new GraphEdge(n4, n5, 20);
+	const e5 = new GraphEdge(n3, n4, 20);
+	const e6 = new GraphEdge(n4, n5, 20);
 
 	graph.addNode(n1);
 	graph.addNode(n2);
@@ -50,6 +60,7 @@ export function GraphContextProvider({ children }: GraphContextProviderProps) {
 	graph.addEdge(e3);
 	graph.addEdge(e4);
 	graph.addEdge(e5);
+	graph.addEdge(e6);
 
 	const initialState = {
 		graph,

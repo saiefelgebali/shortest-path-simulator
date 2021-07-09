@@ -7,6 +7,10 @@ export function graphReducer(state: GraphState, action: GraphAction) {
 			state.graph.addNode(action.node);
 			return { ...state };
 
+		case "removeNode":
+			state.graph.removeNode(action.node);
+			return { ...state };
+
 		case "addEdge":
 			state.graph.addEdge(action.edge);
 			return { ...state };

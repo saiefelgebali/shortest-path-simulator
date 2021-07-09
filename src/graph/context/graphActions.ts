@@ -1,7 +1,9 @@
 import { GraphNode, GraphEdge } from "../index";
+import ActionController from "./ActionController";
 
 // Different GraphAction object types
 type GraphActionAddNode = { type: "addNode"; node: GraphNode };
+type GraphActionRemoveNode = { type: "removeNode"; node: GraphNode };
 type GraphActionAddEdge = { type: "addEdge"; edge: GraphEdge };
 type GraphActionMoveNode = {
 	type: "moveNode";
@@ -12,6 +14,7 @@ type GraphActionMoveNode = {
 // Union Type
 export type GraphAction =
 	| GraphActionAddNode
+	| GraphActionRemoveNode
 	| GraphActionAddEdge
 	| GraphActionMoveNode;
 
@@ -22,10 +25,21 @@ export function addNode(
 	dispatch: React.Dispatch<GraphAction>,
 	node: GraphNode
 ) {
-	return dispatch({
-		type: "addNode",
-		node,
-	});
+	const execute = () =>
+		dispatch({
+			type: "addNode",
+			node,
+		});
+
+	const undo = () =>
+		dispatch({
+			type: "removeNode",
+			node,
+		});
+
+	ActionController.addAction(execute, undo);
+
+	return execute;
 }
 
 /**

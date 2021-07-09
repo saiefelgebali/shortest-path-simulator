@@ -30,6 +30,8 @@ class ActionController {
 		// Get latest action
 		const latestAction = this.actionStack[this.actionStack.length - 1];
 
+		if (!latestAction) return;
+
 		// Undo action
 		latestAction.undo();
 		this.actionStack.pop();
@@ -39,6 +41,8 @@ class ActionController {
 	redo() {
 		// Get latest undone action
 		const latestUndoneAction = this.undoStack[this.undoStack.length - 1];
+
+		if (!latestUndoneAction) return;
 
 		// Execute action
 		latestUndoneAction.execute();

@@ -17,6 +17,13 @@ export class Graph {
 	}
 
 	/**
+	 * Remove node from graph
+	 */
+	removeNode(node: GraphNode) {
+		this.nodes = this.nodes.filter((_node) => _node !== node);
+	}
+
+	/**
 	 * Create a new edge between 2 nodes
 	 */
 	addEdge(edge: GraphEdge) {
