@@ -2,6 +2,7 @@ import { GraphNode, GraphEdge } from "../index";
 import ActionController from "./ActionController";
 
 // Different GraphAction object types
+type GraphActionSelectNode = { type: "selectNode"; node: GraphNode };
 type GraphActionAddNode = { type: "addNode"; node: GraphNode };
 type GraphActionRemoveNode = { type: "removeNode"; node: GraphNode };
 type GraphActionAddEdge = { type: "addEdge"; edge: GraphEdge };
@@ -13,10 +14,24 @@ type GraphActionMoveNode = {
 
 // Union Type
 export type GraphAction =
+	| GraphActionSelectNode
 	| GraphActionAddNode
 	| GraphActionRemoveNode
 	| GraphActionAddEdge
 	| GraphActionMoveNode;
+
+/**
+ * Select a node for a function
+ */
+export function selectNode(
+	dispatch: React.Dispatch<GraphAction>,
+	node: GraphNode
+) {
+	return dispatch({
+		type: "selectNode",
+		node,
+	});
+}
 
 /**
  * Add a new node object to graph

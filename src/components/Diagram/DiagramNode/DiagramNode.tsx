@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { GraphNode } from "../../../graph/GraphNode";
 import { ElementContainer } from "@saiefelgebali/react-diagrams";
 import { GraphContext } from "../../../graph/context/graphContext";
-import { moveNode } from "../../../graph/context/graphActions";
+import { moveNode, selectNode } from "../../../graph/context/graphActions";
 import styles from "./DiagramNode.module.scss";
 
 type DiagramNodeProps = {
@@ -30,11 +30,16 @@ function DiagramNode({ node }: DiagramNodeProps) {
 		});
 	}
 
+	function onClick(event: React.MouseEvent) {
+		selectNode(dispatch, node);
+	}
+
 	return (
 		<ElementContainer
 			className={styles.node}
 			classNameDragging={styles.isDragging}
-			onDrag={onDragMove}>
+			onDrag={onDragMove}
+			onClick={onClick}>
 			<circle cx={node.position.x} cy={node.position.y} r={r} />
 			<text
 				x={node.position.x}

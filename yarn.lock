@@ -1507,10 +1507,10 @@
     estree-walker "^1.0.1"
     picomatch "^2.2.2"
 
-"@saiefelgebali/react-diagrams@^2.0.0":
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/@saiefelgebali/react-diagrams/-/react-diagrams-2.0.0.tgz#f689bd188c4d7632d8801dd9daa0844753e3a70d"
-  integrity sha512-juTuvMfCqkahj0TdIV3uepHEw18ztaDI538t0jpfCd3vBVB7pP1Pyer2Av1HGybng+FcuEnxtpPzg8O94YTmIg==
+"@saiefelgebali/react-diagrams@^2.1.1":
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/@saiefelgebali/react-diagrams/-/react-diagrams-2.1.1.tgz#7a784bf532e58bb9e20ed14d1ab5c3417ac33d58"
+  integrity sha512-QyjM71fqNQj2w8T2xFx3056JwJLFsuqXtFm3wGtavZDilVgnV1GquIEd5ykRmz7FMhk7m3OaA2a1Qlk7m4ZXBQ==
   dependencies:
     "@storybook/addon-postcss" "^2.0.0"
     "@testing-library/jest-dom" "^5.11.4"

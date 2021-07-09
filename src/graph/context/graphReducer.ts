@@ -3,6 +3,10 @@ import { GraphState } from "./graphContext";
 
 export function graphReducer(state: GraphState, action: GraphAction) {
 	switch (action.type) {
+		case "selectNode":
+			console.log("selected node ", action.node);
+			return { ...state, current: action.node };
+
 		case "addNode":
 			state.graph.addNode(action.node);
 			return { ...state };

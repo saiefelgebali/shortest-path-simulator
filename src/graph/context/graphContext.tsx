@@ -10,6 +10,7 @@ import { graphReducer } from "./graphReducer";
  */
 export type GraphState = {
 	graph: Graph;
+	current?: GraphNode | GraphEdge;
 };
 
 interface IGraphContext {
