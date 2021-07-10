@@ -3,11 +3,12 @@ import { useRef } from "react";
 import { useEffect } from "react";
 import { useContext } from "react";
 import { useState } from "react";
-import { GraphEdge, GraphNode } from "../../../graph";
-import { addEdge } from "../../../graph/context/graphActions";
-import { GraphContext } from "../../../graph/context/graphContext";
-import SidebarMenu from "../SidebarMenu/SidebarMenu";
-import styles from "./SidebarPrimary.module.scss";
+import { GraphEdge, GraphNode } from "../../../../graph";
+import { addEdge } from "../../../../graph/context/graphActions";
+import { GraphContext } from "../../../../graph/context/graphContext";
+import SidebarMenu from "../../SidebarMenu/SidebarMenu";
+import styles from "../SidebarPrimary.module.scss";
+import sidebarStyles from "../../Sidebar.module.scss";
 
 type SelectNodeProps = {
 	nodeRef: React.MutableRefObject<GraphNode | undefined>;
@@ -60,13 +61,16 @@ const SelectNode = React.memo(({ nodeRef, current }: SelectNodeProps) => {
 			ref={selectNodeDivRef}
 			onFocus={handleOnFocus}
 			onBlur={handleOnBlur}
-			className={styles.selectNode}
+			className={`${sidebarStyles.formInput} ${styles.selectNode}`}
 			tabIndex={0}>
 			<DisplayName />
 		</div>
 	);
 });
 
+/**
+ * Create new Edge and add it to graph
+ */
 function MenuCreateEdge() {
 	const { state, dispatch } = useContext(GraphContext);
 
@@ -74,9 +78,6 @@ function MenuCreateEdge() {
 	const fromNodeRef = useRef<GraphNode>();
 	const toNodeRef = useRef<GraphNode>();
 
-	/**
-	 * Create new Edge and add it to graph
-	 */
 	function handleCreateEdge(event: React.FormEvent<HTMLFormElement>) {
 		event.preventDefault();
 		const formData = new FormData(event.currentTarget);
@@ -94,26 +95,27 @@ function MenuCreateEdge() {
 
 	return (
 		<SidebarMenu title='Create Edge'>
-			<form onSubmit={handleCreateEdge}>
-				<label className={styles.entryLabel}>From</label>
+			<form onSubmit={handleCreateEdge} className={sidebarStyles.form}>
+				<label className={sidebarStyles.formLabel}>From</label>
 				<SelectNode
 					nodeRef={fromNodeRef}
 					current={state.current as GraphNode}
 				/>
-				<label className={styles.entryLabel}>To</label>
+				<label className={sidebarStyles.formLabel}>To</label>
 				<SelectNode
 					nodeRef={toNodeRef}
 					current={state.current as GraphNode}
 				/>
-				<label className={styles.entryLabel}>Weight</label>
+				<label className={sidebarStyles.formLabel}>Weight</label>
 				<input
+					className={sidebarStyles.formInput}
 					type='number'
 					name='weight'
 					placeholder='0'
 					min={0}
 					maxLength={24}
 				/>
-				<button>Add Edge</button>
+				<button className={sidebarStyles.formSubmit}>Add Edge</button>
 			</form>
 		</SidebarMenu>
 	);

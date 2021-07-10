@@ -14,11 +14,11 @@
 		width: 2rem;
 		height: 2rem;
 		color: white;
-		background-color: var(--secondary);
+		background-color: hsl(0, 0, 40%);
 		transition: background-color ease 0.1s;
 
 		&.isActive {
-			background-color: var(--primary);
+			background-color: hsl(var(--primary), 60%, 10%);
 		}
 	}
 }

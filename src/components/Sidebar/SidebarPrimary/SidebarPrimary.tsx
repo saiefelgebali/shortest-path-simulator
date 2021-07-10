@@ -1,20 +1,17 @@
-import {
-	faArrowsAlt,
-	faLink,
-	faMapMarkerAlt,
-} from "@fortawesome/free-solid-svg-icons";
 import React, { useState } from "react";
+import { faArrowsAlt, faPlus } from "@fortawesome/free-solid-svg-icons";
 import SidebarContainer from "../SidebarContainer/SidebarContainer";
 import SidebarMenu from "../SidebarMenu/SidebarMenu";
 import SidebarMenuSwitcher from "../SidebarMenu/SidebarMenuSwitcher";
 import SidebarMenuSwitcherOption from "../SidebarMenu/SidebarMenuSwitcherOption";
-import MenuCreateEdge from "./MenuCreateEdge";
-import MenuCreateNode from "./MenuCreateNode";
+import MenuCreateEdge from "./menus/MenuCreateEdge";
+import MenuCreateNode from "./menus/MenuCreateNode";
+import styles from "./SidebarPrimary.module.scss";
+import MenuMoveNode from "./menus/MenuMoveNode";
 
 enum Menu {
-	createNode = "CREATE_NODE",
-	createEdge = "CREATE_EDGE",
-	moveNode = "MOVE_NODE",
+	create = "CREATE",
+	move = "MOVE",
 }
 
 /**
@@ -22,45 +19,30 @@ enum Menu {
  */
 function SidebarPrimary() {
 	// Current menu state
-	const [menu, setMenu] = useState<Menu>(Menu.createNode);
+	const [menu, setMenu] = useState<Menu>(Menu.create);
 
-	const MoveNodeMenu = () => {
-		return (
-			<SidebarMenu title='Move Node'>
-				<form>
-					<label htmlFor='snap'>Snap to grid</label>
-					<input
-						type='range'
-						name='snap'
-						min={0}
-						max={200}
-						step={5}
-						list='snapRangeList'
-					/>
-					<datalist id='snapRangeList'>
-						<option value={0}></option>
-						<option value={50}></option>
-						<option value={100}></option>
-						<option value={150} label='150'></option>
-						<option value={200}></option>
-					</datalist>
-					<div>Click and drag nodes to rearrange them!</div>
-				</form>
-			</SidebarMenu>
-		);
-	};
+	const CreateMenu = () => (
+		<div className={styles.menuList}>
+			<MenuCreateNode />
+			<MenuCreateEdge />
+		</div>
+	);
+
+	const MoveMenu = () => (
+		<div className={styles.menuList}>
+			<MenuMoveNode />
+		</div>
+	);
 
 	/**
 	 * Show currently selected menu
 	 */
 	const CurrentMenu = () => {
 		switch (menu) {
-			case Menu.createNode:
-				return <MenuCreateNode />;
-			case Menu.createEdge:
-				return <MenuCreateEdge />;
-			case Menu.moveNode:
-				return <MoveNodeMenu />;
+			case Menu.create:
+				return <CreateMenu />;
+			case Menu.move:
+				return <MoveMenu />;
 		}
 	};
 
@@ -68,19 +50,13 @@ function SidebarPrimary() {
 		<SidebarContainer>
 			<SidebarMenuSwitcher>
 				<SidebarMenuSwitcherOption
-					menu={Menu.createNode}
+					menu={Menu.create}
 					currentMenu={menu}
-					icon={faMapMarkerAlt}
+					icon={faPlus}
 					setMenu={setMenu}
 				/>
 				<SidebarMenuSwitcherOption
-					menu={Menu.createEdge}
-					currentMenu={menu}
-					icon={faLink}
-					setMenu={setMenu}
-				/>
-				<SidebarMenuSwitcherOption
-					menu={Menu.moveNode}
+					menu={Menu.move}
 					currentMenu={menu}
 					icon={faArrowsAlt}
 					setMenu={setMenu}

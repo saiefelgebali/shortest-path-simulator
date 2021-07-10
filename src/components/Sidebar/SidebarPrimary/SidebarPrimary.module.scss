@@ -2,24 +2,7 @@
 	text-transform: uppercase;
 }
 
-label.entryLabel {
-	display: block;
-	font-weight: 500;
-	margin-bottom: 0.2rem;
-}
-
 .selectNode {
-	cursor: pointer;
-	font-size: 1.2rem;
-	padding: 0.2rem 0rem;
-	border-bottom: 2px solid transparent;
-	transition: border-bottom ease-out 0.2s;
-
-	&:focus {
-		cursor: default;
-		border-bottom: 2px solid var(--primary);
-	}
-
 	&:empty {
 		&::after {
 			content: "Select a node";

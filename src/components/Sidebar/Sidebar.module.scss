@@ -1,0 +1,52 @@
+.menuList {
+	& > * {
+		margin-bottom: 2rem;
+	}
+}
+
+.form {
+	width: 100%;
+	> * {
+		margin-bottom: 1.2rem;
+		&:last-child {
+			margin-bottom: 0rem;
+		}
+	}
+	.formLabel {
+		display: block;
+		font-weight: 500;
+		margin-bottom: 0.2rem;
+	}
+
+	.formInput {
+		display: block;
+		font-size: 1.2rem;
+		background-color: transparent;
+		padding: 0.2rem 0rem;
+		width: 100%;
+		border-bottom: 2px dotted black;
+
+		&::placeholder {
+			color: hsl(0, 0%, 40%);
+			opacity: 0.8;
+		}
+
+		&:focus {
+			border-bottom: 2px solid hsl(var(--primary), 60%, 10%);
+		}
+	}
+
+	.formSubmit {
+		cursor: pointer;
+		background-color: hsl(var(--primary), 60%, 10%);
+		color: white;
+		width: 100%;
+		border: none;
+		padding: 0.5rem 1rem;
+		border-radius: 0.5rem;
+
+		&:active {
+			transform: translateY(4px);
+		}
+	}
+}
