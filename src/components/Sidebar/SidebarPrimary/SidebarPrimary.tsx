@@ -3,15 +3,13 @@ import {
 	faLink,
 	faMapMarkerAlt,
 } from "@fortawesome/free-solid-svg-icons";
-import React, { useState, useContext } from "react";
-import { addNode } from "../../../graph/context/graphActions";
-import { GraphContext } from "../../../graph/context/graphContext";
-import { GraphNode } from "../../../graph/GraphNode";
+import React, { useState } from "react";
 import SidebarContainer from "../SidebarContainer/SidebarContainer";
 import SidebarMenu from "../SidebarMenu/SidebarMenu";
 import SidebarMenuSwitcher from "../SidebarMenu/SidebarMenuSwitcher";
 import SidebarMenuSwitcherOption from "../SidebarMenu/SidebarMenuSwitcherOption";
-import styles from "./SidebarPrimary.module.scss";
+import MenuCreateEdge from "./MenuCreateEdge";
+import MenuCreateNode from "./MenuCreateNode";
 
 enum Menu {
 	createNode = "CREATE_NODE",
@@ -23,57 +21,8 @@ enum Menu {
  * Give user options to add items to the graph
  */
 function SidebarPrimary() {
-	const { dispatch } = useContext(GraphContext);
-
 	// Current menu state
 	const [menu, setMenu] = useState<Menu>(Menu.createNode);
-
-	function handleSubmitCreateNode(event: React.FormEvent) {
-		event.preventDefault();
-
-		const formData = new FormData(event.currentTarget as HTMLFormElement);
-
-		const name = formData.get("name") as string;
-		const id = formData.get("id") as string;
-
-		if (!name || !id) return;
-
-		const node = new GraphNode(name, id);
-		console.log(node);
-
-		// Update graph
-		addNode(dispatch, node);
-	}
-
-	const CreateNodeMenu = () => (
-		<SidebarMenu title='Create Node'>
-			<form onSubmit={handleSubmitCreateNode}>
-				<input
-					type='text'
-					name='name'
-					maxLength={24}
-					placeholder='Name'
-				/>
-				<input
-					type='text'
-					name='id'
-					placeholder='ID'
-					maxLength={3}
-					className={styles.idInput}
-				/>
-				<button>Add Node</button>
-			</form>
-		</SidebarMenu>
-	);
-
-	const CreateEdgeMenu = () => (
-		<SidebarMenu title='Create Edge'>
-			<form>
-				<input type='number' placeholder='Weight' maxLength={24} />
-				<button>Add Node</button>
-			</form>
-		</SidebarMenu>
-	);
 
 	const MoveNodeMenu = () => {
 		return (
@@ -107,9 +56,9 @@ function SidebarPrimary() {
 	const CurrentMenu = () => {
 		switch (menu) {
 			case Menu.createNode:
-				return <CreateNodeMenu />;
+				return <MenuCreateNode />;
 			case Menu.createEdge:
-				return <CreateEdgeMenu />;
+				return <MenuCreateEdge />;
 			case Menu.moveNode:
 				return <MoveNodeMenu />;
 		}

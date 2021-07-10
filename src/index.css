@@ -18,10 +18,12 @@ body {
 }
 
 /* Reset default styles */
-input {
+input, select {
 	border: none;
 }
 
-input:focus, input:active, button:focus, button:active {
+input:focus, input:active, 
+button:focus, button:active, 
+select:focus, select:active {
 	outline: none;
 }
