@@ -38,9 +38,4 @@ export class Graph {
 	removeEdge(edge: GraphEdge) {
 		this.edges = this.edges.filter((_edge) => _edge !== edge);
 	}
-
-	/**
-	 * Applies Dijkstra's algorithm
-	 */
-	findShortestPath(start: GraphNode, end: GraphNode) {}
 }
