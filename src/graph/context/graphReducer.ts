@@ -18,6 +18,10 @@ export function graphReducer(state: GraphState, action: GraphAction) {
 			state.graph.addEdge(action.edge);
 			return { ...state };
 
+		case "removeEdge":
+			state.graph.removeEdge(action.edge);
+			return { ...state };
+
 		case "moveNode":
 			action.node.moveNode(action.position);
 			return { ...state };

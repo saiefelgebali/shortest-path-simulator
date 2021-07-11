@@ -6,6 +6,7 @@ type GraphActionSelectNode = { type: "selectNode"; node: GraphNode };
 type GraphActionAddNode = { type: "addNode"; node: GraphNode };
 type GraphActionRemoveNode = { type: "removeNode"; node: GraphNode };
 type GraphActionAddEdge = { type: "addEdge"; edge: GraphEdge };
+type GraphActionRemoveEdge = { type: "removeEdge"; edge: GraphEdge };
 type GraphActionMoveNode = {
 	type: "moveNode";
 	node: GraphNode;
@@ -18,6 +19,7 @@ export type GraphAction =
 	| GraphActionAddNode
 	| GraphActionRemoveNode
 	| GraphActionAddEdge
+	| GraphActionRemoveEdge
 	| GraphActionMoveNode;
 
 /**
@@ -64,6 +66,19 @@ export function addEdge(
 	dispatch: React.Dispatch<GraphAction>,
 	edge: GraphEdge
 ) {
+	const execute = () =>
+		dispatch({
+			type: "addEdge",
+			edge,
+		});
+
+	const undo = () =>
+		dispatch({
+			type: "removeEdge",
+			edge,
+		});
+
+	ActionController.addAction(execute, undo);
 	return dispatch({
 		type: "addEdge",
 		edge,

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { faArrowsAlt, faPlus } from "@fortawesome/free-solid-svg-icons";
 import SidebarContainer from "../SidebarContainer/SidebarContainer";
-import SidebarMenu from "../SidebarMenu/SidebarMenu";
 import SidebarMenuSwitcher from "../SidebarMenu/SidebarMenuSwitcher";
 import SidebarMenuSwitcherOption from "../SidebarMenu/SidebarMenuSwitcherOption";
 import MenuCreateEdge from "./menus/MenuCreateEdge";

@@ -36,6 +36,7 @@ function MenuCreateNode() {
 				<input
 					type='text'
 					name='name'
+					autoComplete='off'
 					maxLength={24}
 					placeholder='Room 1'
 					className={sidebarStyles.formInput}
@@ -44,6 +45,7 @@ function MenuCreateNode() {
 				<input
 					type='text'
 					name='id'
+					autoComplete='off'
 					placeholder='RM1'
 					maxLength={3}
 					className={`${sidebarStyles.formInput} ${styles.idInput}`}
