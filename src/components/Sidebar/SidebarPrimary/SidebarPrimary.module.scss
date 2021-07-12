@@ -8,4 +8,9 @@
 			content: "Select a node";
 		}
 	}
+
+	&:active,
+	&:focus {
+		outline: none;
+	}
 }

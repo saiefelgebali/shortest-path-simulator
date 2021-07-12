@@ -25,6 +25,12 @@ function MenuCreateNode() {
 		// Update graph
 		addNode(dispatch, node);
 		event.currentTarget.reset();
+
+		// Return focus to name entry
+		const nameInput = event.currentTarget.querySelector(
+			"input[name='name']"
+		) as HTMLInputElement;
+		nameInput.focus();
 	}
 
 	return (

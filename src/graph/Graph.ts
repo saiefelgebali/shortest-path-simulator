@@ -1,3 +1,4 @@
+import { findShortestPath } from "./algorithm";
 import { GraphEdge } from "./GraphEdge";
 import { GraphNode } from "./GraphNode";
 
@@ -37,5 +38,12 @@ export class Graph {
 	 */
 	removeEdge(edge: GraphEdge) {
 		this.edges = this.edges.filter((_edge) => _edge !== edge);
+	}
+
+	/**
+	 * Find shortest path from start and end nodes
+	 */
+	findShortestPath(start: GraphNode, end: GraphNode) {
+		return findShortestPath(this, start, end);
 	}
 }

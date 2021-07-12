@@ -32,8 +32,7 @@ export function GraphContextProvider({ children }: GraphContextProviderProps) {
 	useEffect(() => {
 		window.addEventListener("keydown", (event) => {
 			if (event.key === "Enter") {
-				const result = findShortestPath(
-					graph,
+				const result = graph.findShortestPath(
 					graph.nodes[0],
 					graph.nodes[graph.nodes.length - 1]
 				);
