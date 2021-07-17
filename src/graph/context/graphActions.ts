@@ -12,6 +12,16 @@ type GraphActionMoveNode = {
 	node: GraphNode;
 	position: { x: number; y: number };
 };
+type GraphActionEditNodeName = {
+	type: "editNodeName";
+	node: GraphNode;
+	name: string;
+};
+type GraphActionEditNodeID = {
+	type: "editNodeID";
+	node: GraphNode;
+	id: string;
+};
 
 // Union Type
 export type GraphAction =
@@ -20,7 +30,9 @@ export type GraphAction =
 	| GraphActionRemoveNode
 	| GraphActionAddEdge
 	| GraphActionRemoveEdge
-	| GraphActionMoveNode;
+	| GraphActionMoveNode
+	| GraphActionEditNodeName
+	| GraphActionEditNodeID;
 
 /**
  * Select a node for a function
@@ -97,5 +109,35 @@ export function moveNode(
 		type: "moveNode",
 		node,
 		position,
+	});
+}
+
+/**
+ * Edit node name
+ */
+export function editNodeName(
+	dispatch: React.Dispatch<GraphAction>,
+	node: GraphNode,
+	name: string
+) {
+	return dispatch({
+		type: "editNodeName",
+		node,
+		name,
+	});
+}
+
+/**
+ * Edit node name
+ */
+export function editNodeID(
+	dispatch: React.Dispatch<GraphAction>,
+	node: GraphNode,
+	id: string
+) {
+	return dispatch({
+		type: "editNodeID",
+		node,
+		id,
 	});
 }

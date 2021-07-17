@@ -1,6 +1,5 @@
 import React, { createContext, useReducer } from "react";
 import { useEffect } from "react";
-import { findShortestPath } from "../algorithm";
 import { Graph, GraphNode, GraphEdge } from "../index";
 import ActionController from "./ActionController";
 import { GraphAction } from "./graphActions";

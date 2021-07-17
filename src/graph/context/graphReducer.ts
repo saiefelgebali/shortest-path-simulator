@@ -26,6 +26,14 @@ export function graphReducer(state: GraphState, action: GraphAction) {
 			action.node.moveNode(action.position);
 			return { ...state };
 
+		case "editNodeName":
+			action.node.editName(action.name);
+			return { ...state };
+
+		case "editNodeID":
+			action.node.editID(action.id);
+			return { ...state };
+
 		default:
 			return { ...state };
 	}

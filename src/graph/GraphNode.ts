@@ -37,4 +37,18 @@ export class GraphNode {
 	moveNode(newPosition: { x: number; y: number }) {
 		this.position = newPosition;
 	}
+
+	/**
+	 * Edit name of node
+	 */
+	editName(newName: string) {
+		this.name = newName;
+	}
+
+	/**
+	 * Edit ID of node
+	 */
+	editID(newID: string) {
+		this.id = newID.toUpperCase();
+	}
 }
