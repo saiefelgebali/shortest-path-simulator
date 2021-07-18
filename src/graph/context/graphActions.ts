@@ -68,7 +68,7 @@ export function addNode(
 
 	ActionController.addAction(execute, undo);
 
-	return execute;
+	return execute();
 }
 
 /**
@@ -91,10 +91,7 @@ export function addEdge(
 		});
 
 	ActionController.addAction(execute, undo);
-	return dispatch({
-		type: "addEdge",
-		edge,
-	});
+	return execute();
 }
 
 /**

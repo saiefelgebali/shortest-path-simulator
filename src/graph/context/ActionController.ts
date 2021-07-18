@@ -20,7 +20,6 @@ class ActionController {
 	addAction(execute: Function, undo: Function) {
 		const action = new Action(execute, undo);
 		this.actionStack.push(action);
-		action.execute();
 	}
 
 	/**

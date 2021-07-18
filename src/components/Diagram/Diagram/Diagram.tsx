@@ -13,10 +13,12 @@ function Diagram() {
 			<DiagramNode node={node} key={index} />
 		));
 
-	const Edges = () =>
-		state.graph.edges.map((edge, index) => (
+	const Edges = () => {
+		console.log(state.graph.edges);
+		return state.graph.edges.map((edge, index) => (
 			<DiagramEdge edge={edge} key={index} />
 		));
+	};
 
 	return (
 		<View className={styles.view}>
