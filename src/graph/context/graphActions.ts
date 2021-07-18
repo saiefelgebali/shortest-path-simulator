@@ -4,6 +4,7 @@ import ActionController from "./ActionController";
 // Different GraphAction object types
 type GraphActionSelectNode = { type: "selectNode"; node: GraphNode };
 type GraphActionSelectEdge = { type: "selectEdge"; edge: GraphEdge };
+type GraphActionDeselect = { type: "deselect" };
 type GraphActionAddNode = { type: "addNode"; node: GraphNode };
 type GraphActionRemoveNode = { type: "removeNode"; node: GraphNode };
 type GraphActionAddEdge = { type: "addEdge"; edge: GraphEdge };
@@ -28,6 +29,7 @@ type GraphActionEditNodeID = {
 export type GraphAction =
 	| GraphActionSelectNode
 	| GraphActionSelectEdge
+	| GraphActionDeselect
 	| GraphActionAddNode
 	| GraphActionRemoveNode
 	| GraphActionAddEdge
@@ -36,6 +38,14 @@ export type GraphAction =
 	| GraphActionEditNodeName
 	| GraphActionEditNodeID;
 
+/**
+ * Deselect current
+ */
+export function deselect(dispatch: React.Dispatch<GraphAction>) {
+	return dispatch({
+		type: "deselect",
+	});
+}
 /**
  * Select a node
  */
@@ -101,6 +111,29 @@ export function addEdge(
 	const undo = () =>
 		dispatch({
 			type: "removeEdge",
+			edge,
+		});
+
+	ActionController.addAction(execute, undo);
+	return execute();
+}
+
+/**
+ * Remove an edge from graph
+ */
+export function removeEdge(
+	dispatch: React.Dispatch<GraphAction>,
+	edge: GraphEdge
+) {
+	const execute = () =>
+		dispatch({
+			type: "removeEdge",
+			edge,
+		});
+
+	const undo = () =>
+		dispatch({
+			type: "addEdge",
 			edge,
 		});
 

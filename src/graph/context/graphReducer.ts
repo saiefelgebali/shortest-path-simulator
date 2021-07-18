@@ -9,6 +9,9 @@ export function graphReducer(state: GraphState, action: GraphAction) {
 		case "selectEdge":
 			return { ...state, current: action.edge };
 
+		case "deselect":
+			return { ...state, current: undefined };
+
 		case "addNode":
 			state.graph.addNode(action.node);
 			return { ...state };

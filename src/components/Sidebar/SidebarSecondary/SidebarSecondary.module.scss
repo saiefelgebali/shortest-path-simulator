@@ -1,13 +1,18 @@
 .editPosition {
 	display: flex;
-
 	> label {
 		font-weight: 500;
+		margin-right: 0.5rem;
 	}
+}
 
-	.positionInput {
-		width: 100%;
-		padding: 0.3rem;
-		background-color: transparent;
+.deleteButton {
+	> * {
+		margin-right: 0.5rem;
 	}
+	& > *:last-child {
+		margin-right: 0rem;
+	}
+	background-color: hsl(0%, 50%, 45%);
+	color: white;
 }

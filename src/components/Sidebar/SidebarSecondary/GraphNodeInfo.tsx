@@ -75,7 +75,7 @@ const GraphNodeInfo = React.memo(({ node }: { node: GraphNode }) => {
 				<div className={styles.editPosition}>
 					<label>X:</label>
 					<input
-						className={styles.positionInput}
+						className={sidebarStyles.formInput}
 						type='number'
 						step={10}
 						name='x'
@@ -84,7 +84,7 @@ const GraphNodeInfo = React.memo(({ node }: { node: GraphNode }) => {
 					/>
 					<label>Y:</label>
 					<input
-						className={styles.positionInput}
+						className={sidebarStyles.formInput}
 						type='number'
 						step={10}
 						name='y'
