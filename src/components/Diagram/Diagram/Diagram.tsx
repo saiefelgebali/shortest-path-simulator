@@ -14,7 +14,6 @@ function Diagram() {
 		));
 
 	const Edges = () => {
-		console.log(state.graph.edges);
 		return state.graph.edges.map((edge, index) => (
 			<DiagramEdge edge={edge} key={index} />
 		));

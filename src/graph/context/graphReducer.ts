@@ -6,6 +6,9 @@ export function graphReducer(state: GraphState, action: GraphAction) {
 		case "selectNode":
 			return { ...state, current: action.node };
 
+		case "selectEdge":
+			return { ...state, current: action.edge };
+
 		case "addNode":
 			state.graph.addNode(action.node);
 			return { ...state };

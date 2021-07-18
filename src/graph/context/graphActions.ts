@@ -3,6 +3,7 @@ import ActionController from "./ActionController";
 
 // Different GraphAction object types
 type GraphActionSelectNode = { type: "selectNode"; node: GraphNode };
+type GraphActionSelectEdge = { type: "selectEdge"; edge: GraphEdge };
 type GraphActionAddNode = { type: "addNode"; node: GraphNode };
 type GraphActionRemoveNode = { type: "removeNode"; node: GraphNode };
 type GraphActionAddEdge = { type: "addEdge"; edge: GraphEdge };
@@ -26,6 +27,7 @@ type GraphActionEditNodeID = {
 // Union Type
 export type GraphAction =
 	| GraphActionSelectNode
+	| GraphActionSelectEdge
 	| GraphActionAddNode
 	| GraphActionRemoveNode
 	| GraphActionAddEdge
@@ -35,7 +37,7 @@ export type GraphAction =
 	| GraphActionEditNodeID;
 
 /**
- * Select a node for a function
+ * Select a node
  */
 export function selectNode(
 	dispatch: React.Dispatch<GraphAction>,
@@ -44,6 +46,18 @@ export function selectNode(
 	return dispatch({
 		type: "selectNode",
 		node,
+	});
+}
+/**
+ * Select an edge
+ */
+export function selectEdge(
+	dispatch: React.Dispatch<GraphAction>,
+	edge: GraphEdge
+) {
+	return dispatch({
+		type: "selectEdge",
+		edge,
 	});
 }
 
