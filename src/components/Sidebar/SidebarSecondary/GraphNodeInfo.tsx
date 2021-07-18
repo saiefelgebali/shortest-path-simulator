@@ -13,8 +13,7 @@ import { GraphContext } from "../../../graph/context/graphContext";
 
 const GraphNodeInfo = React.memo(({ node }: { node: GraphNode }) => {
 	const EditName = () => {
-		const { state, dispatch } = useContext(GraphContext);
-		const node = state.current as GraphNode;
+		const { dispatch } = useContext(GraphContext);
 
 		function handleChange(event: FormEvent<HTMLInputElement>) {
 			editNodeName(dispatch, node, event.currentTarget.value);
@@ -35,8 +34,7 @@ const GraphNodeInfo = React.memo(({ node }: { node: GraphNode }) => {
 	};
 
 	const EditID = () => {
-		const { state, dispatch } = useContext(GraphContext);
-		const node = state.current as GraphNode;
+		const { dispatch } = useContext(GraphContext);
 
 		function handleChange(event: FormEvent<HTMLInputElement>) {
 			editNodeID(dispatch, node, event.currentTarget.value);
@@ -58,8 +56,7 @@ const GraphNodeInfo = React.memo(({ node }: { node: GraphNode }) => {
 	};
 
 	const EditPosition = () => {
-		const { state, dispatch } = useContext(GraphContext);
-		const node = state.current as GraphNode;
+		const { dispatch } = useContext(GraphContext);
 
 		// Move Node to new position on change input
 		function handlePositionInput(event: React.FormEvent<HTMLInputElement>) {

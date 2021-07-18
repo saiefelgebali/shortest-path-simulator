@@ -24,6 +24,11 @@ type GraphActionEditNodeID = {
 	node: GraphNode;
 	id: string;
 };
+type GraphActionEditEdgeWeight = {
+	type: "editEdgeWeight";
+	edge: GraphEdge;
+	weight: number;
+};
 
 // Union Type
 export type GraphAction =
@@ -36,7 +41,8 @@ export type GraphAction =
 	| GraphActionRemoveEdge
 	| GraphActionMoveNode
 	| GraphActionEditNodeName
-	| GraphActionEditNodeID;
+	| GraphActionEditNodeID
+	| GraphActionEditEdgeWeight;
 
 /**
  * Deselect current
@@ -183,5 +189,20 @@ export function editNodeID(
 		type: "editNodeID",
 		node,
 		id,
+	});
+}
+
+/**
+ * Edit edge weight
+ */
+export function editEdgeWeight(
+	dispatch: React.Dispatch<GraphAction>,
+	edge: GraphEdge,
+	weight: number
+) {
+	return dispatch({
+		type: "editEdgeWeight",
+		edge,
+		weight,
 	});
 }

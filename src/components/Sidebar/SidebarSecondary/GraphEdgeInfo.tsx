@@ -1,11 +1,15 @@
-import React from "react";
+import React, { FormEvent } from "react";
 import { GraphEdge } from "../../../graph";
 import SidebarMenu from "../SidebarMenu/SidebarMenu";
 import styles from "./SidebarSecondary.module.scss";
 import sidebarStyles from "../Sidebar.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
-import { deselect, removeEdge } from "../../../graph/context/graphActions";
+import {
+	deselect,
+	editEdgeWeight,
+	removeEdge,
+} from "../../../graph/context/graphActions";
 import { useContext } from "react";
 import { GraphContext } from "../../../graph/context/graphContext";
 
@@ -26,6 +30,15 @@ const GraphEdgeInfo = React.memo(({ edge }: { edge: GraphEdge }) => {
 	};
 
 	const EdgeWeight = () => {
+		const { dispatch } = useContext(GraphContext);
+
+		function handleChange(event: FormEvent<HTMLInputElement>) {
+			const newWeight = parseInt(event.currentTarget.value);
+			if (!isNaN(newWeight)) {
+				editEdgeWeight(dispatch, edge, newWeight);
+			}
+		}
+
 		return (
 			<>
 				<label className={sidebarStyles.formLabel}>Weight</label>
@@ -34,6 +47,8 @@ const GraphEdgeInfo = React.memo(({ edge }: { edge: GraphEdge }) => {
 					type='number'
 					name='weight'
 					value={edge.weight}
+					min={0}
+					onChange={handleChange}
 				/>
 			</>
 		);

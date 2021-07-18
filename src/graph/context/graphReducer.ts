@@ -40,6 +40,10 @@ export function graphReducer(state: GraphState, action: GraphAction) {
 			action.node.editID(action.id);
 			return { ...state };
 
+		case "editEdgeWeight":
+			action.edge.editWeight(action.weight);
+			return { ...state };
+
 		default:
 			return { ...state };
 	}

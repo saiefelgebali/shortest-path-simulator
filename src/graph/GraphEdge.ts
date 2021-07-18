@@ -13,4 +13,8 @@ export class GraphEdge {
 		this.toNode = toNode;
 		this.weight = weight;
 	}
+
+	editWeight(newWeight: number) {
+		this.weight = newWeight;
+	}
 }
