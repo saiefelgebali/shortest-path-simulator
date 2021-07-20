@@ -18,15 +18,14 @@ function DiagramNode({ node }: DiagramNodeProps) {
 	const r = 50;
 
 	// Handle app state
-	const { dispatch } = useContext(GraphContext);
+	const { state, dispatch } = useContext(GraphContext);
 
 	// Fired while dragging
 	function onDragMove(event: MouseEvent) {
 		// Snap to grid
-		const snap = 10;
 		moveNode(dispatch, node, {
-			x: Math.round(event.offsetX / snap) * snap,
-			y: Math.round(event.offsetY / snap) * snap,
+			x: Math.round(event.offsetX / state.snap) * state.snap,
+			y: Math.round(event.offsetY / state.snap) * state.snap,
 		});
 	}
 

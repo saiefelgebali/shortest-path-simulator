@@ -3,14 +3,16 @@ import { GraphState } from "./graphContext";
 
 export function graphReducer(state: GraphState, action: GraphAction) {
 	switch (action.type) {
+		case "deselect":
+			return { ...state, current: undefined };
+
+		case "changeSnap":
+			return { ...state, snap: action.snap };
 		case "selectNode":
 			return { ...state, current: action.node };
 
 		case "selectEdge":
 			return { ...state, current: action.edge };
-
-		case "deselect":
-			return { ...state, current: undefined };
 
 		case "addNode":
 			state.graph.addNode(action.node);

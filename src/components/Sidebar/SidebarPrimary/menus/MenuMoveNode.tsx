@@ -1,29 +1,43 @@
-import React from "react";
+import React, { FormEvent } from "react";
 import SidebarMenu from "../../SidebarMenu/SidebarMenu";
 import sidebarStyles from "../../Sidebar.module.scss";
+import { useContext } from "react";
+import { GraphContext } from "../../../../graph/context/graphContext";
+import { changeSnap } from "../../../../graph/context/graphActions";
 
 function MenuMoveNode() {
+	const { state, dispatch } = useContext(GraphContext);
+
+	/**
+	 * Change context snap value based on input.
+	 * Min value always at 1.
+	 */
+	function onChangeSnap(event: FormEvent<HTMLInputElement>) {
+		let newSnap = event.currentTarget.valueAsNumber;
+		if (newSnap <= 1 || !newSnap) {
+			newSnap = 1;
+			changeSnap(dispatch, newSnap);
+		} else {
+			changeSnap(dispatch, newSnap);
+		}
+		event.currentTarget.valueAsNumber = newSnap;
+	}
+
 	return (
 		<SidebarMenu title='Move Node'>
-			<form className={sidebarStyles.form}>
+			<div className={sidebarStyles.form}>
 				<label className={sidebarStyles.formLabel}>Snap to grid</label>
 				<input
-					type='range'
+					className={sidebarStyles.formInput}
+					type='number'
 					name='snap'
+					defaultValue={state.snap}
 					min={0}
-					max={200}
-					step={5}
-					list='snapRangeList'
+					step={10}
+					onBlur={onChangeSnap}
 				/>
-				<datalist id='snapRangeList'>
-					<option value={0}></option>
-					<option value={50}></option>
-					<option value={100}></option>
-					<option value={150} label='150'></option>
-					<option value={200}></option>
-				</datalist>
 				<div>Click and drag nodes to rearrange them!</div>
-			</form>
+			</div>
 		</SidebarMenu>
 	);
 }

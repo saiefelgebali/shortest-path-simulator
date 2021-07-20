@@ -11,6 +11,7 @@ import { graphReducer } from "./graphReducer";
 export type GraphState = {
 	graph: Graph;
 	current?: GraphNode | GraphEdge;
+	snap: number;
 };
 
 interface IGraphContext {
@@ -47,6 +48,7 @@ export function GraphContextProvider({ children }: GraphContextProviderProps) {
 
 	const initialState = {
 		graph,
+		snap: 50,
 	};
 
 	const [state, dispatch] = useReducer(graphReducer, initialState);
