@@ -1,7 +1,7 @@
 import React from "react";
 import { useContext } from "react";
 import { GraphNode } from "../../../../graph";
-import { addNode } from "../../../../graph/context/graphActions";
+import { addNode } from "../../../../graph/context/graphNodeActions";
 import { GraphContext } from "../../../../graph/context/graphContext";
 import SidebarMenu from "../../SidebarMenu/SidebarMenu";
 import styles from "../SidebarPrimary.module.scss";

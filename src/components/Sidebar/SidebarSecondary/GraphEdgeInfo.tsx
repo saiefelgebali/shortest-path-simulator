@@ -6,10 +6,10 @@ import sidebarStyles from "../Sidebar.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import {
-	deselect,
 	editEdgeWeight,
 	removeEdge,
-} from "../../../graph/context/graphActions";
+} from "../../../graph/context/graphEdgeActions";
+import { deselect } from "../../../graph/context/graphActions";
 import { useContext } from "react";
 import { GraphContext } from "../../../graph/context/graphContext";
 

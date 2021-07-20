@@ -7,9 +7,13 @@ import {
 	editNodeID,
 	editNodeName,
 	moveNode,
-} from "../../../graph/context/graphActions";
+	removeNode,
+} from "../../../graph/context/graphNodeActions";
 import { useContext } from "react";
 import { GraphContext } from "../../../graph/context/graphContext";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import { deselect } from "../../../graph/context/graphActions";
 
 const GraphNodeInfo = React.memo(({ node }: { node: GraphNode }) => {
 	const EditName = () => {
@@ -93,12 +97,29 @@ const GraphNodeInfo = React.memo(({ node }: { node: GraphNode }) => {
 		);
 	};
 
+	const DeleteNode = () => {
+		const { dispatch } = useContext(GraphContext);
+
+		function handleDeleteNode() {
+			removeNode(dispatch, node);
+			deselect(dispatch);
+		}
+
+		return (
+			<button className={styles.deleteButton} onClick={handleDeleteNode}>
+				<FontAwesomeIcon icon={faTrash} />
+				<span>Delete Node</span>
+			</button>
+		);
+	};
+
 	return (
 		<SidebarMenu title='Edit Node'>
 			<div className={sidebarStyles.form}>
 				<EditName />
 				<EditID />
 				<EditPosition />
+				<DeleteNode />
 			</div>
 		</SidebarMenu>
 	);

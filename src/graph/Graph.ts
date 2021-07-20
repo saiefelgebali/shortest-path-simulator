@@ -22,15 +22,16 @@ export class Graph {
 	 */
 	removeNode(node: GraphNode) {
 		this.nodes = this.nodes.filter((_node) => _node !== node);
+		this.edges = this.edges.filter(
+			(_edge) => _edge.fromNode !== node && _edge.toNode !== node
+		);
 	}
 
 	/**
 	 * Create a new edge between 2 nodes
 	 */
 	addEdge(edge: GraphEdge) {
-		edge.fromNode.addEdge(edge.toNode, edge.weight);
 		this.edges.push(edge);
-		return this;
 	}
 
 	/**

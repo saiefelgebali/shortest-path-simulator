@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { useContext } from "react";
 import { useState } from "react";
 import { GraphEdge, GraphNode } from "../../../../graph";
-import { addEdge } from "../../../../graph/context/graphActions";
+import { addEdge } from "../../../../graph/context/graphEdgeActions";
 import { GraphContext } from "../../../../graph/context/graphContext";
 import SidebarMenu from "../../SidebarMenu/SidebarMenu";
 import styles from "../SidebarPrimary.module.scss";

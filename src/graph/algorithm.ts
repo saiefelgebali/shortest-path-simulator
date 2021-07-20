@@ -34,7 +34,8 @@ interface NodeDistanceMap {
 const nodeDistances = (graph: Graph, node: GraphNode) => {
 	let distances: IndexDistanceMap = {};
 
-	node.edges.forEach((edge) => {
+	graph.edges.forEach((edge) => {
+		if (edge.fromNode !== node) return;
 		const nodeIndex = graph.nodes.findIndex((node) => node === edge.toNode);
 		distances[nodeIndex] = edge.weight;
 	});

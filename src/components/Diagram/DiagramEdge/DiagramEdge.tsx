@@ -1,7 +1,7 @@
 import React from "react";
 import { useContext } from "react";
 import { ElementContainer } from "@saiefelgebali/react-diagrams";
-import { selectEdge } from "../../../graph/context/graphActions";
+import { selectEdge } from "../../../graph/context/graphEdgeActions";
 import { GraphContext } from "../../../graph/context/graphContext";
 import { GraphEdge } from "../../../graph/GraphEdge";
 import styles from "./DiagramEdge.module.scss";

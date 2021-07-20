@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { GraphNode } from "../../../graph/GraphNode";
 import { ElementContainer } from "@saiefelgebali/react-diagrams";
 import { GraphContext } from "../../../graph/context/graphContext";
-import { moveNode, selectNode } from "../../../graph/context/graphActions";
+import { moveNode, selectNode } from "../../../graph/context/graphNodeActions";
 import styles from "./DiagramNode.module.scss";
 
 type DiagramNodeProps = {
