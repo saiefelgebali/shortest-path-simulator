@@ -1,29 +1,25 @@
 import { GraphEdge } from "../index";
-import ActionController from "./ActionController";
+import { GraphAction, dispatchAction } from "./graphActions";
 
-type GraphActionSelectEdge = { type: "selectEdge"; edge: GraphEdge };
-type GraphActionAddEdge = { type: "addEdge"; edge: GraphEdge };
-type GraphActionRemoveEdge = { type: "removeEdge"; edge: GraphEdge };
-type GraphActionEditEdgeWeight = {
-	type: "editEdgeWeight";
-	edge: GraphEdge;
-	weight: number;
-};
-
-export type GraphEdgeAction =
-	| GraphActionSelectEdge
-	| GraphActionAddEdge
-	| GraphActionRemoveEdge
-	| GraphActionEditEdgeWeight;
+export interface GraphEdgeActionMap {
+	selectEdge: { type: "selectEdge"; edge: GraphEdge };
+	addEdge: { type: "addEdge"; edge: GraphEdge };
+	removeEdge: { type: "removeEdge"; edge: GraphEdge };
+	editEdgeWeight: {
+		type: "editEdgeWeight";
+		edge: GraphEdge;
+		weight: number;
+	};
+}
 
 /**
  * Select an edge
  */
 export function selectEdge(
-	dispatch: React.Dispatch<GraphEdgeAction>,
+	dispatch: React.Dispatch<GraphAction>,
 	edge: GraphEdge
 ) {
-	return dispatch({
+	return dispatchAction(dispatch, {
 		type: "selectEdge",
 		edge,
 	});
@@ -33,57 +29,51 @@ export function selectEdge(
  * Add a new edge object to graph
  */
 export function addEdge(
-	dispatch: React.Dispatch<GraphEdgeAction>,
+	dispatch: React.Dispatch<GraphAction>,
 	edge: GraphEdge
 ) {
-	const execute = () =>
-		dispatch({
+	dispatchAction(
+		dispatch,
+		{
 			type: "addEdge",
 			edge,
-		});
-
-	const undo = () =>
-		dispatch({
+		},
+		{
 			type: "removeEdge",
 			edge,
-		});
-
-	ActionController.addAction(execute, undo);
-	return execute();
+		}
+	);
 }
 
 /**
  * Remove an edge from graph
  */
 export function removeEdge(
-	dispatch: React.Dispatch<GraphEdgeAction>,
+	dispatch: React.Dispatch<GraphAction>,
 	edge: GraphEdge
 ) {
-	const execute = () =>
-		dispatch({
+	dispatchAction(
+		dispatch,
+		{
 			type: "removeEdge",
 			edge,
-		});
-
-	const undo = () =>
-		dispatch({
+		},
+		{
 			type: "addEdge",
 			edge,
-		});
-
-	ActionController.addAction(execute, undo);
-	return execute();
+		}
+	);
 }
 
 /**
  * Edit edge weight
  */
 export function editEdgeWeight(
-	dispatch: React.Dispatch<GraphEdgeAction>,
+	dispatch: React.Dispatch<GraphAction>,
 	edge: GraphEdge,
 	weight: number
 ) {
-	return dispatch({
+	return dispatchAction(dispatch, {
 		type: "editEdgeWeight",
 		edge,
 		weight,

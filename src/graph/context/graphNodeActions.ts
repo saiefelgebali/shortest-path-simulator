@@ -1,42 +1,35 @@
 import { GraphNode } from "../index";
-import ActionController from "./ActionController";
+import { GraphAction, dispatchAction } from "./graphActions";
 
-type GraphActionSelectNode = { type: "selectNode"; node: GraphNode };
-type GraphActionAddNode = { type: "addNode"; node: GraphNode };
-type GraphActionRemoveNode = { type: "removeNode"; node: GraphNode };
-type GraphActionMoveNode = {
-	type: "moveNode";
-	node: GraphNode;
-	position: { x: number; y: number };
-};
-type GraphActionEditNodeName = {
-	type: "editNodeName";
-	node: GraphNode;
-	name: string;
-};
-type GraphActionEditNodeID = {
-	type: "editNodeID";
-	node: GraphNode;
-	id: string;
-};
-
-// Union Type
-export type GraphNodeAction =
-	| GraphActionSelectNode
-	| GraphActionAddNode
-	| GraphActionRemoveNode
-	| GraphActionMoveNode
-	| GraphActionEditNodeName
-	| GraphActionEditNodeID;
+export interface GraphNodeActionMap {
+	selectNode: { type: "selectNode"; node: GraphNode };
+	addNode: { type: "addNode"; node: GraphNode };
+	removeNode: { type: "removeNode"; node: GraphNode };
+	moveNode: {
+		type: "moveNode";
+		node: GraphNode;
+		position: { x: number; y: number };
+	};
+	editNodeName: {
+		type: "editNodeName";
+		node: GraphNode;
+		name: string;
+	};
+	editNodeID: {
+		type: "editNodeID";
+		node: GraphNode;
+		id: string;
+	};
+}
 
 /**
  * Select a node
  */
 export function selectNode(
-	dispatch: React.Dispatch<GraphNodeAction>,
+	dispatch: React.Dispatch<GraphAction>,
 	node: GraphNode
 ) {
-	return dispatch({
+	return dispatchAction(dispatch, {
 		type: "selectNode",
 		node,
 	});
@@ -46,59 +39,51 @@ export function selectNode(
  * Add a new node object to graph
  */
 export function addNode(
-	dispatch: React.Dispatch<GraphNodeAction>,
+	dispatch: React.Dispatch<GraphAction>,
 	node: GraphNode
 ) {
-	const execute = () =>
-		dispatch({
+	dispatchAction(
+		dispatch,
+		{
 			type: "addNode",
 			node,
-		});
-
-	const undo = () =>
-		dispatch({
+		},
+		{
 			type: "removeNode",
 			node,
-		});
-
-	ActionController.addAction(execute, undo);
-
-	return execute();
+		}
+	);
 }
 
 /**
  * Remove node from graph
  */
 export function removeNode(
-	dispatch: React.Dispatch<GraphNodeAction>,
+	dispatch: React.Dispatch<GraphAction>,
 	node: GraphNode
 ) {
-	const execute = () =>
-		dispatch({
+	dispatchAction(
+		dispatch,
+		{
 			type: "removeNode",
 			node,
-		});
-
-	const undo = () =>
-		dispatch({
+		},
+		{
 			type: "addNode",
 			node,
-		});
-
-	ActionController.addAction(execute, undo);
-
-	return execute();
+		}
+	);
 }
 
 /**
  * Move node to new position
  */
 export function moveNode(
-	dispatch: React.Dispatch<GraphNodeAction>,
+	dispatch: React.Dispatch<GraphAction>,
 	node: GraphNode,
 	position: { x: number; y: number }
 ) {
-	return dispatch({
+	return dispatchAction(dispatch, {
 		type: "moveNode",
 		node,
 		position,
@@ -109,11 +94,11 @@ export function moveNode(
  * Edit node name
  */
 export function editNodeName(
-	dispatch: React.Dispatch<GraphNodeAction>,
+	dispatch: React.Dispatch<GraphAction>,
 	node: GraphNode,
 	name: string
 ) {
-	return dispatch({
+	return dispatchAction(dispatch, {
 		type: "editNodeName",
 		node,
 		name,
@@ -124,11 +109,11 @@ export function editNodeName(
  * Edit node name
  */
 export function editNodeID(
-	dispatch: React.Dispatch<GraphNodeAction>,
+	dispatch: React.Dispatch<GraphAction>,
 	node: GraphNode,
 	id: string
 ) {
-	return dispatch({
+	return dispatchAction(dispatch, {
 		type: "editNodeID",
 		node,
 		id,

@@ -1,6 +1,5 @@
 import { View } from "@saiefelgebali/react-diagrams";
 import { useContext } from "react";
-import { GraphNode } from "../../../graph";
 import { GraphContext } from "../../../graph/context/graphContext";
 import DiagramEdge from "../DiagramEdge/DiagramEdge";
 import DiagramNode from "../DiagramNode/DiagramNode";
@@ -18,11 +17,6 @@ function Diagram() {
 		return state.graph.edges.map((edge, index) => (
 			<DiagramEdge edge={edge} key={index} />
 		));
-	};
-
-	const ShortestPath = () => {
-		if (!state.shortestPath) return null;
-		return null;
 	};
 
 	return (

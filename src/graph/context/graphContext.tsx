@@ -1,10 +1,9 @@
-import React, { createContext, useReducer } from "react";
-import { useEffect } from "react";
+import React, { useEffect, createContext, useReducer } from "react";
 import { ShortestPathResult } from "../algorithm";
 import { Graph, GraphNode, GraphEdge } from "../index";
-import ActionController from "./ActionController";
 import { GraphAction } from "./graphActions";
 import { graphReducer } from "./graphReducer";
+import ActionController from "./ActionController";
 
 /**
  * Store graph state

@@ -1,6 +1,6 @@
 import React from "react";
 import SidebarMenu from "../../SidebarMenu/SidebarMenu";
-import styles from "../SidebarPrimary.module.scss";
+// import styles from "../SidebarPrimary.module.scss";
 import sidebarStyles from "../../Sidebar.module.scss";
 import { useContext } from "react";
 import { GraphContext } from "../../../../graph/context/graphContext";

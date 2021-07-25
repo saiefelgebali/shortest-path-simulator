@@ -1,23 +1,39 @@
-import { GraphEdgeAction } from "./graphEdgeActions";
-import { GraphNodeAction } from "./graphNodeActions";
+import React from "react";
+import ActionController from "./ActionController";
+import { GraphEdgeActionMap } from "./graphEdgeActions";
+import { GraphNodeActionMap } from "./graphNodeActions";
 
-type GraphActionDeselect = { type: "deselect" };
-type GraphActionChangeSnap = { type: "changeSnap"; snap: number };
-type GraphActionFindShortestPath = { type: "findShortestPath" };
+export interface GraphActionMap extends GraphNodeActionMap, GraphEdgeActionMap {
+	changeSnap: { type: "changeSnap"; snap: number };
+	findShortestPath: { type: "findShortestPath" };
+	deselect: { type: "deselect" };
+}
 
-// Union type of available graph actions
-export type GraphAction =
-	| GraphNodeAction
-	| GraphEdgeAction
-	| GraphActionDeselect
-	| GraphActionChangeSnap
-	| GraphActionFindShortestPath;
+export type GraphAction = GraphActionMap[keyof GraphActionMap];
+
+export function dispatchAction(
+	dispatch: React.Dispatch<GraphAction>,
+	action: GraphAction,
+	undoAction?: GraphAction
+) {
+	if (undoAction) {
+		const execute = () => dispatch(action);
+
+		const undo = () => dispatch(undoAction);
+
+		ActionController.addAction(execute, undo);
+
+		return dispatch(action);
+	}
+
+	dispatch(action);
+}
 
 /**
  * Deselect current
  */
 export function deselect(dispatch: React.Dispatch<GraphAction>) {
-	return dispatch({
+	return dispatchAction(dispatch, {
 		type: "deselect",
 	});
 }
@@ -29,7 +45,7 @@ export function changeSnap(
 	dispatch: React.Dispatch<GraphAction>,
 	snap: number
 ) {
-	return dispatch({
+	return dispatchAction(dispatch, {
 		type: "changeSnap",
 		snap,
 	});
@@ -39,7 +55,7 @@ export function changeSnap(
  * Run Dijkstra's algorithm on graph
  */
 export function findShortestPath(dispatch: React.Dispatch<GraphAction>) {
-	return dispatch({
+	return dispatchAction(dispatch, {
 		type: "findShortestPath",
 	});
 }
