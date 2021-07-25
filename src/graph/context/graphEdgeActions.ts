@@ -15,23 +15,22 @@ export interface GraphEdgeActionMap {
 /**
  * Select an edge
  */
-export function selectEdge(
+export const selectEdge = (
 	dispatch: React.Dispatch<GraphAction>,
 	edge: GraphEdge
-) {
-	return dispatchAction(dispatch, {
+) =>
+	dispatchAction(dispatch, {
 		type: "selectEdge",
 		edge,
 	});
-}
 
 /**
  * Add a new edge object to graph
  */
-export function addEdge(
+export const addEdge = (
 	dispatch: React.Dispatch<GraphAction>,
 	edge: GraphEdge
-) {
+) =>
 	dispatchAction(
 		dispatch,
 		{
@@ -43,15 +42,14 @@ export function addEdge(
 			edge,
 		}
 	);
-}
 
 /**
  * Remove an edge from graph
  */
-export function removeEdge(
+export const removeEdge = (
 	dispatch: React.Dispatch<GraphAction>,
 	edge: GraphEdge
-) {
+) =>
 	dispatchAction(
 		dispatch,
 		{
@@ -63,19 +61,17 @@ export function removeEdge(
 			edge,
 		}
 	);
-}
 
 /**
  * Edit edge weight
  */
-export function editEdgeWeight(
+export const editEdgeWeight = (
 	dispatch: React.Dispatch<GraphAction>,
 	edge: GraphEdge,
 	weight: number
-) {
-	return dispatchAction(dispatch, {
+) =>
+	dispatchAction(dispatch, {
 		type: "editEdgeWeight",
 		edge,
 		weight,
 	});
-}

@@ -11,6 +11,13 @@ export interface GraphActionMap extends GraphNodeActionMap, GraphEdgeActionMap {
 
 export type GraphAction = GraphActionMap[keyof GraphActionMap];
 
+/**
+ * Handle generic actions
+ * @param dispatch
+ * @param action execute action
+ * @param undoAction revert action
+ * @returns
+ */
 export function dispatchAction(
 	dispatch: React.Dispatch<GraphAction>,
 	action: GraphAction,
@@ -32,30 +39,27 @@ export function dispatchAction(
 /**
  * Deselect current
  */
-export function deselect(dispatch: React.Dispatch<GraphAction>) {
-	return dispatchAction(dispatch, {
+export const deselect = (dispatch: React.Dispatch<GraphAction>) =>
+	dispatchAction(dispatch, {
 		type: "deselect",
 	});
-}
 
 /**
  * Change snap value
  */
-export function changeSnap(
+export const changeSnap = (
 	dispatch: React.Dispatch<GraphAction>,
 	snap: number
-) {
-	return dispatchAction(dispatch, {
+) =>
+	dispatchAction(dispatch, {
 		type: "changeSnap",
 		snap,
 	});
-}
 
 /**
  * Run Dijkstra's algorithm on graph
  */
-export function findShortestPath(dispatch: React.Dispatch<GraphAction>) {
-	return dispatchAction(dispatch, {
+export const findShortestPath = (dispatch: React.Dispatch<GraphAction>) =>
+	dispatchAction(dispatch, {
 		type: "findShortestPath",
 	});
-}
