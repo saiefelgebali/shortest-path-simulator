@@ -1,6 +1,11 @@
 import { Graph } from "./Graph";
 import { GraphNode } from "./GraphNode";
 
+export type ShortestPathResult = {
+	distance: number;
+	path: GraphNode[];
+};
+
 /**
  * Each entry has a distance assigned to it
  * eg.
@@ -139,6 +144,7 @@ export function findShortestPath(
 		shortestPath.push(parent);
 		parent = parents[parent];
 	}
+	shortestPath.push(startIndex);
 	shortestPath.reverse();
 
 	const shortestPathNodes = shortestPath.map(
@@ -146,7 +152,7 @@ export function findShortestPath(
 	);
 
 	// This is the shortest path from start to end nodes
-	const result = {
+	const result: ShortestPathResult = {
 		distance: distances[endIndex],
 		path: shortestPathNodes,
 	};

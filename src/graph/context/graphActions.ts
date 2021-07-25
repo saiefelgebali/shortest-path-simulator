@@ -3,13 +3,15 @@ import { GraphNodeAction } from "./graphNodeActions";
 
 type GraphActionDeselect = { type: "deselect" };
 type GraphActionChangeSnap = { type: "changeSnap"; snap: number };
+type GraphActionFindShortestPath = { type: "findShortestPath" };
 
 // Union type of available graph actions
 export type GraphAction =
 	| GraphNodeAction
 	| GraphEdgeAction
 	| GraphActionDeselect
-	| GraphActionChangeSnap;
+	| GraphActionChangeSnap
+	| GraphActionFindShortestPath;
 
 /**
  * Deselect current
@@ -30,5 +32,14 @@ export function changeSnap(
 	return dispatch({
 		type: "changeSnap",
 		snap,
+	});
+}
+
+/**
+ * Run Dijkstra's algorithm on graph
+ */
+export function findShortestPath(dispatch: React.Dispatch<GraphAction>) {
+	return dispatch({
+		type: "findShortestPath",
 	});
 }

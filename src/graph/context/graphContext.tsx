@@ -1,5 +1,6 @@
 import React, { createContext, useReducer } from "react";
 import { useEffect } from "react";
+import { ShortestPathResult } from "../algorithm";
 import { Graph, GraphNode, GraphEdge } from "../index";
 import ActionController from "./ActionController";
 import { GraphAction } from "./graphActions";
@@ -12,6 +13,7 @@ export type GraphState = {
 	graph: Graph;
 	current?: GraphNode | GraphEdge;
 	snap: number;
+	shortestPath?: ShortestPathResult;
 };
 
 interface IGraphContext {

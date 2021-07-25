@@ -1,3 +1,4 @@
+import { findShortestPath } from "../algorithm";
 import { GraphAction } from "./graphActions";
 import { GraphState } from "./graphContext";
 
@@ -8,6 +9,15 @@ export function graphReducer(state: GraphState, action: GraphAction) {
 
 		case "changeSnap":
 			return { ...state, snap: action.snap };
+
+		case "findShortestPath":
+			const shortestPath = findShortestPath(
+				state.graph,
+				state.graph.nodes[0],
+				state.graph.nodes[state.graph.nodes.length - 1]
+			);
+			return { ...state, shortestPath };
+
 		case "selectNode":
 			return { ...state, current: action.node };
 

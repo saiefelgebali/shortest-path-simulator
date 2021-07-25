@@ -1,5 +1,9 @@
 import React, { useState } from "react";
-import { faArrowsAlt, faPlus } from "@fortawesome/free-solid-svg-icons";
+import {
+	faArrowsAlt,
+	faMapMarked,
+	faPlus,
+} from "@fortawesome/free-solid-svg-icons";
 import SidebarContainer from "../SidebarContainer/SidebarContainer";
 import SidebarMenuSwitcher from "../SidebarMenu/SidebarMenuSwitcher";
 import SidebarMenuSwitcherOption from "../SidebarMenu/SidebarMenuSwitcherOption";
@@ -7,10 +11,12 @@ import MenuCreateEdge from "./menus/MenuCreateEdge";
 import MenuCreateNode from "./menus/MenuCreateNode";
 import styles from "./SidebarPrimary.module.scss";
 import MenuMoveNode from "./menus/MenuMoveNode";
+import MenuAlgorithm from "./menus/MenuAlgorithm";
 
 enum Menu {
 	create = "CREATE",
 	move = "MOVE",
+	algorithm = "ALGORITHM",
 }
 
 /**
@@ -27,12 +33,6 @@ function SidebarPrimary() {
 		</div>
 	);
 
-	const MoveMenu = () => (
-		<div className={styles.menuList}>
-			<MenuMoveNode />
-		</div>
-	);
-
 	/**
 	 * Show currently selected menu
 	 */
@@ -41,7 +41,9 @@ function SidebarPrimary() {
 			case Menu.create:
 				return <CreateMenu />;
 			case Menu.move:
-				return <MoveMenu />;
+				return <MenuMoveNode />;
+			case Menu.algorithm:
+				return <MenuAlgorithm />;
 		}
 	};
 
@@ -58,6 +60,12 @@ function SidebarPrimary() {
 					menu={Menu.move}
 					currentMenu={menu}
 					icon={faArrowsAlt}
+					setMenu={setMenu}
+				/>
+				<SidebarMenuSwitcherOption
+					menu={Menu.algorithm}
+					currentMenu={menu}
+					icon={faMapMarked}
 					setMenu={setMenu}
 				/>
 			</SidebarMenuSwitcher>

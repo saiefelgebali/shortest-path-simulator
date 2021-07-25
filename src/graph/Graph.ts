@@ -25,6 +25,7 @@ export class Graph {
 		this.edges = this.edges.filter(
 			(_edge) => _edge.fromNode !== node && _edge.toNode !== node
 		);
+		return this;
 	}
 
 	/**
@@ -32,6 +33,7 @@ export class Graph {
 	 */
 	addEdge(edge: GraphEdge) {
 		this.edges.push(edge);
+		return this;
 	}
 
 	/**
@@ -39,6 +41,7 @@ export class Graph {
 	 */
 	removeEdge(edge: GraphEdge) {
 		this.edges = this.edges.filter((_edge) => _edge !== edge);
+		return this;
 	}
 
 	/**
