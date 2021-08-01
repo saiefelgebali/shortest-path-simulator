@@ -1,160 +1,104 @@
 import { Graph } from "./Graph";
 import { GraphNode } from "./GraphNode";
+import { InMemoryKeyValueStore } from "../util/storage";
 
-export type ShortestPathResult = {
+export interface ShortestPathResult {
 	distance: number;
 	path: GraphNode[];
-};
-
-/**
- * Each entry has a distance assigned to it
- * eg.
- * const map: IndexDistanceMap = {
- *      1: 12,
- *      3: 30,
- *      4: 8
- * }
- */
-interface IndexDistanceMap {
-	[index: number]: number;
 }
 
-/**
- * Every entry must have a numerical index.
- * Each index has a IndexDistanceMap object.
- * eg.
- * const map: NodeDistanceMap = {
- *      0: {1: 20, 2: 20, 3: 20},
- *      1: {2: 40, 3: 10, 4: 20},
- *      ...
- * }
- */
-interface NodeDistanceMap {
-	[index: number]: IndexDistanceMap;
-}
-
-/**
- * Map distances from one node to its adjacent nodes using edge weights
- */
-const nodeDistances = (graph: Graph, node: GraphNode) => {
-	let distances: IndexDistanceMap = {};
-
-	graph.edges.forEach((edge) => {
-		if (edge.fromNode !== node) return;
-		const nodeIndex = graph.nodes.findIndex((node) => node === edge.toNode);
-		distances[nodeIndex] = edge.weight;
-	});
-
-	return distances;
-};
-
-/**
- * Get shortest unvisited node
- */
-function getShortestDistanceNode(
-	distances: IndexDistanceMap,
-	visited: number[]
-) {
-	let shortest: number | null = null;
-
-	for (const node in distances) {
-		const nodeIndex = parseInt(node);
-
-		// Check if node has shortest distance
-		const isShortest =
-			!shortest || distances[nodeIndex] < distances[shortest];
-
-		// Check if node has been visited before
-		if (isShortest && !visited.includes(nodeIndex)) {
-			shortest = nodeIndex;
-		}
+class NodeDistances extends InMemoryKeyValueStore<GraphNode, number> {
+	/**
+	 * Init a new NodeDistances KeyValue store.
+	 * Map out existing nodes with default values of Infinity.
+	 */
+	constructor(nodes: GraphNode[]) {
+		super({ keys: nodes, defaultValue: Infinity });
 	}
 
-	return shortest;
+	/**
+	 * Return node with shortest distance, excluding visited nodes
+	 */
+	getShortestDistanceNode(visited: GraphNode[]) {
+		const unvisited = this.store.filter(
+			(obj) => !visited.includes(obj.key)
+		);
+
+		if (!unvisited.length) return null;
+
+		const shortest = unvisited.reduce((prev, current) =>
+			current.value < prev.value ? current : prev
+		);
+
+		return shortest?.key;
+	}
 }
+
+// class NodeParents extends InMemoryKeyValueStore<GraphNode, {node: GraphNode, edge: GraphEdge}> {
+
+// }
 
 export function findShortestPath(
 	graph: Graph,
-	start: GraphNode,
-	end: GraphNode
+	startNode: GraphNode,
+	endNode: GraphNode
 ) {
-	// All nodes and the weights of edges to adjacent nodes
-	const indexDistanceGraph: NodeDistanceMap = {
-		...graph.nodes.map((node, index) => nodeDistances(graph, node)),
-	};
-
-	// All nodes and their distance to start node
-	const startIndex = graph.nodes.findIndex((node) => node === start);
-	const endIndex = graph.nodes.findIndex((node) => node === end);
-	const distances: IndexDistanceMap = {
-		...indexDistanceGraph[startIndex], // Map nodes adjacent to start node
-	};
-
-	distances[endIndex] = Infinity;
-
-	// Keep track of parents
-	const parents: { [index: number]: any } = {};
-	parents[endIndex] = null;
-	for (const child in indexDistanceGraph[startIndex]) {
-		parents[child] = startIndex;
-	}
-
-	// Keep track of visited node indices
-	const visited: number[] = [];
-
-	// Find node with shortest distance
-	let nodeIndex = getShortestDistanceNode(distances, visited);
-
-	// For that node
-	while (nodeIndex) {
-		// Find its distance and its child nodes
-		const distance = distances[nodeIndex];
-		const children = indexDistanceGraph[nodeIndex];
-
-		// For each child node
-		for (const child in children) {
-			const childIndex = parseInt(child);
-			// Make sure child is not start node - prevent infinite loop
-			if (childIndex === startIndex) continue;
-
-			// Save the distance from start to child
-			const newDistance = distance + children[childIndex];
-
-			// Either add or update child node's distance in main distances object
-			// Update if new distance is shorter than previous distance
-			if (!distances[childIndex] || distances[child] > newDistance) {
-				// Save the distance
-				distances[childIndex] = newDistance;
-
-				// Record the path
-				parents[childIndex] = nodeIndex;
-			}
+	// Setup algorithm
+	const distances = new NodeDistances(graph.nodes);
+	const visited: GraphNode[] = [];
+	const parents = new InMemoryKeyValueStore<GraphNode, GraphNode | undefined>(
+		{
+			keys: graph.nodes,
+			defaultValue: undefined,
 		}
-		// Add node to visited
-		visited.push(nodeIndex);
-
-		// Move to the next nearest node - iterates loop with new node
-		nodeIndex = getShortestDistanceNode(distances, visited);
-	}
-
-	// When the end node is reached, reverse the recorded path back to the start node
-	const shortestPath = [endIndex];
-	let parent = parents[endIndex];
-	while (parent) {
-		shortestPath.push(parent);
-		parent = parents[parent];
-	}
-	shortestPath.push(startIndex);
-	shortestPath.reverse();
-
-	const shortestPathNodes = shortestPath.map(
-		(nodeIndex) => graph.nodes[nodeIndex]
 	);
 
-	// This is the shortest path from start to end nodes
+	distances.set(startNode, 0);
+	let current = distances.getShortestDistanceNode(visited);
+
+	// Iterate through nodes in order of shortest distance from start
+	while (current !== null) {
+		const node = current;
+		const distance = distances.get(node)!;
+		const edges = graph.getNodeEdges(node);
+
+		edges.forEach((edge) => {
+			// Get other node from edge
+			const child = edge.nodes.find((n) => n !== node)!;
+
+			// Prevent infinite loop if child is start node
+			if (child === startNode) return;
+
+			// Check if new distance is shorter than current
+			const newDistance = distance + edge.weight;
+			const currentDistance = distances.get(child)!;
+			if (newDistance < currentDistance) {
+				// Update distance & parent
+				distances.set(child, newDistance);
+				parents.set(child, node ?? undefined);
+			}
+		});
+
+		visited.push(node);
+
+		current = distances.getShortestDistanceNode(visited);
+	}
+
+	// Obtain result
+	const distance = distances.get(endNode)!;
+	const path = [];
+
+	// Find find path by using parents
+	let parent: GraphNode | undefined = endNode;
+	while (parent) {
+		path.push(parent);
+		parent = parents.get(parent);
+	}
+	path.reverse();
+
 	const result: ShortestPathResult = {
-		distance: distances[endIndex],
-		path: shortestPathNodes,
+		distance,
+		path,
 	};
 
 	return result;

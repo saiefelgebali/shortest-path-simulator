@@ -1,39 +1,28 @@
+interface Position {
+	x: number;
+	y: number;
+}
+
 /**
  * Represents a node in a graph.
  */
 export class GraphNode {
+	position: Position;
 	name: string;
 	id: string;
-	position: { x: number; y: number } = { x: 200, y: 200 };
 
-	/**
-	 * Create a new node with name
-	 * @param name name of node
-	 * @param id short name of node
-	 */
-	constructor(name: string, id: string) {
+	constructor(name: string, id: string, initialPosition?: Position) {
 		this.name = name;
-		this.id = id.toUpperCase();
+		this.id = id;
+		this.position = initialPosition ?? { x: 0, y: 0 };
 	}
 
-	/**
-	 * Move node to new position
-	 */
-	moveNode(newPosition: { x: number; y: number }) {
+	edit({ name, id }: { name?: string; id?: string }) {
+		if (name) this.name = name;
+		if (id) this.id = id;
+	}
+
+	move(newPosition: Position) {
 		this.position = newPosition;
-	}
-
-	/**
-	 * Edit name of node
-	 */
-	editName(newName: string) {
-		this.name = newName;
-	}
-
-	/**
-	 * Edit ID of node
-	 */
-	editID(newID: string) {
-		this.id = newID.toUpperCase();
 	}
 }

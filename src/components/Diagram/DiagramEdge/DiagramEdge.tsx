@@ -24,17 +24,17 @@ function DiagramEdge({ edge }: DiagramEdgeProps) {
 		<ElementContainer className={styles.edge} onClick={onClick}>
 			<line
 				className={styles.overlay}
-				x1={edge.fromNode.position.x}
-				y1={edge.fromNode.position.y}
-				x2={edge.toNode.position.x}
-				y2={edge.toNode.position.y}
+				x1={edge.nodes[0].position.x}
+				y1={edge.nodes[0].position.y}
+				x2={edge.nodes[1].position.x}
+				y2={edge.nodes[1].position.y}
 			/>
 			<line
 				className={styles.main}
-				x1={edge.fromNode.position.x}
-				y1={edge.fromNode.position.y}
-				x2={edge.toNode.position.x}
-				y2={edge.toNode.position.y}
+				x1={edge.nodes[0].position.x}
+				y1={edge.nodes[0].position.y}
+				x2={edge.nodes[1].position.x}
+				y2={edge.nodes[1].position.y}
 			/>
 		</ElementContainer>
 	);

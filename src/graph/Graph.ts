@@ -1,53 +1,75 @@
-import { findShortestPath } from "./algorithm";
 import { GraphEdge } from "./GraphEdge";
 import { GraphNode } from "./GraphNode";
 
-/**
- * Represents a traversable graph with nodes and edges.
- */
 export class Graph {
-	nodes: GraphNode[] = [];
-	edges: GraphEdge[] = [];
+	private _nodes: GraphNode[] = [];
+	public get nodes() {
+		return this._nodes;
+	}
 
-	/**
-	 * Create a new node in graph
-	 */
+	private _edges: GraphEdge[] = [];
+	public get edges() {
+		return this._edges;
+	}
+
 	addNode(node: GraphNode) {
-		this.nodes.push(node);
+		this._nodes.push(node);
 		return this;
 	}
 
-	/**
-	 * Remove node from graph
-	 */
-	removeNode(node: GraphNode) {
-		this.nodes = this.nodes.filter((_node) => _node !== node);
-		this.edges = this.edges.filter(
-			(_edge) => _edge.fromNode !== node && _edge.toNode !== node
-		);
+	addNodes(nodes: GraphNode[]) {
+		nodes.forEach((node) => {
+			this.addNode(node);
+		});
 		return this;
 	}
 
-	/**
-	 * Create a new edge between 2 nodes
-	 */
 	addEdge(edge: GraphEdge) {
-		this.edges.push(edge);
+		// Validate edge nodes in graph
+		let errorNodes: GraphNode[] = [];
+		edge.nodes.forEach((node) => {
+			if (!this.nodes.includes(node)) {
+				errorNodes.push(node);
+			}
+		});
+
+		// Return error if nodes not in graph
+		if (errorNodes.length > 0) {
+			const message = `Graph does not contain node${
+				errorNodes.length > 1 ? "s" : ""
+			}${errorNodes.map((node) => {
+				return ` "${node.name}"`;
+			})}.`;
+
+			const error = {
+				nodes: errorNodes,
+				message,
+			};
+
+			throw error;
+		}
+
+		this._edges.push(edge);
 		return this;
 	}
 
-	/**
-	 * Remove an edge from the graph
-	 */
+	addEdges(edges: GraphEdge[]) {
+		edges.forEach((edge) => this.addEdge(edge));
+		return this;
+	}
+
+	removeNode(node: GraphNode) {
+		this._nodes = this._nodes.filter((_node) => _node !== node);
+		this._edges.filter((_edge) => !_edge.nodes.includes(node));
+		return this;
+	}
+
 	removeEdge(edge: GraphEdge) {
-		this.edges = this.edges.filter((_edge) => _edge !== edge);
+		this._edges = this._edges.filter((_edge) => _edge !== edge);
 		return this;
 	}
 
-	/**
-	 * Find shortest path from start and end nodes
-	 */
-	findShortestPath(start: GraphNode, end: GraphNode) {
-		return findShortestPath(this, start, end);
+	getNodeEdges(node: GraphNode) {
+		return this.edges.filter((edge) => edge.nodes.includes(node));
 	}
 }

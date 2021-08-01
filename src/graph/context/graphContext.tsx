@@ -1,5 +1,5 @@
 import React, { useEffect, createContext, useReducer } from "react";
-import { ShortestPathResult } from "../algorithm";
+import { findShortestPath, ShortestPathResult } from "../algorithm";
 import { Graph, GraphNode, GraphEdge } from "../index";
 import { GraphAction } from "./graphActions";
 import { graphReducer } from "./graphReducer";
@@ -33,7 +33,8 @@ export function GraphContextProvider({ children }: GraphContextProviderProps) {
 	useEffect(() => {
 		window.addEventListener("keydown", (event) => {
 			if (event.key === "Enter") {
-				const result = graph.findShortestPath(
+				const result = findShortestPath(
+					graph,
 					graph.nodes[0],
 					graph.nodes[graph.nodes.length - 1]
 				);

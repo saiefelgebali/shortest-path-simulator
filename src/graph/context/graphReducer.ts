@@ -41,19 +41,19 @@ export function graphReducer(state: GraphState, action: GraphAction) {
 			return { ...state };
 
 		case "moveNode":
-			action.node.moveNode(action.position);
+			action.node.move(action.position);
 			return { ...state };
 
 		case "editNodeName":
-			action.node.editName(action.name);
+			action.node.edit({ name: action.name });
 			return { ...state };
 
 		case "editNodeID":
-			action.node.editID(action.id);
+			action.node.edit({ id: action.id });
 			return { ...state };
 
 		case "editEdgeWeight":
-			action.edge.editWeight(action.weight);
+			action.edge.edit({ weight: action.weight });
 			return { ...state };
 
 		default:

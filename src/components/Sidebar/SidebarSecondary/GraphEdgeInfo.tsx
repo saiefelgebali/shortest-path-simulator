@@ -19,11 +19,11 @@ const GraphEdgeInfo = React.memo(({ edge }: { edge: GraphEdge }) => {
 			<>
 				<label className={sidebarStyles.formLabel}>From</label>
 				<div>
-					{edge.fromNode.id} - {edge.fromNode.name}
+					{edge.nodes[0].id} - {edge.nodes[1].name}
 				</div>
 				<label className={sidebarStyles.formLabel}>To</label>
 				<div>
-					{edge.toNode.id} - {edge.toNode.name}
+					{edge.nodes[0].id} - {edge.nodes[1].name}
 				</div>
 			</>
 		);
