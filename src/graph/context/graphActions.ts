@@ -1,11 +1,16 @@
 import React from "react";
+import { GraphNode } from "../GraphNode";
 import ActionController from "./ActionController";
 import { GraphEdgeActionMap } from "./graphEdgeActions";
 import { GraphNodeActionMap } from "./graphNodeActions";
 
 export interface GraphActionMap extends GraphNodeActionMap, GraphEdgeActionMap {
 	changeSnap: { type: "changeSnap"; snap: number };
-	findShortestPath: { type: "findShortestPath" };
+	findShortestPath: {
+		type: "findShortestPath";
+		start: GraphNode;
+		end: GraphNode;
+	};
 	deselect: { type: "deselect" };
 }
 
@@ -59,7 +64,13 @@ export const changeSnap = (
 /**
  * Run Dijkstra's algorithm on graph
  */
-export const findShortestPath = (dispatch: React.Dispatch<GraphAction>) =>
+export const findShortestPath = (
+	dispatch: React.Dispatch<GraphAction>,
+	start: GraphNode,
+	end: GraphNode
+) =>
 	dispatchAction(dispatch, {
 		type: "findShortestPath",
+		start,
+		end,
 	});

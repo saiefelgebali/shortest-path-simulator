@@ -13,8 +13,8 @@ export function graphReducer(state: GraphState, action: GraphAction) {
 		case "findShortestPath":
 			const shortestPath = findShortestPath(
 				state.graph,
-				state.graph.nodes[0],
-				state.graph.nodes[state.graph.nodes.length - 1]
+				action.start,
+				action.end
 			);
 			return { ...state, shortestPath };
 
