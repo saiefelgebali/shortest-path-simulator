@@ -1,9 +1,8 @@
-import React, { useEffect, createContext, useReducer } from "react";
-import { findShortestPath, ShortestPathResult } from "../algorithm";
+import React, { createContext, useReducer } from "react";
+import { ShortestPathResult } from "../algorithm";
 import { Graph, GraphNode, GraphEdge } from "../index";
 import { GraphAction } from "./graphActions";
 import { graphReducer } from "./graphReducer";
-import ActionController from "./ActionController";
 
 /**
  * Store graph state
@@ -30,22 +29,6 @@ type GraphContextProviderProps = {
 };
 
 export function GraphContextProvider({ children }: GraphContextProviderProps) {
-	useEffect(() => {
-		window.addEventListener("keydown", (event) => {
-			if (event.key === "Enter") {
-				const result = findShortestPath(
-					graph,
-					graph.nodes[0],
-					graph.nodes[graph.nodes.length - 1]
-				);
-				console.log(result);
-			}
-
-			if (!(event.key === "z" && event.ctrlKey)) return;
-			ActionController.undo();
-		});
-	}, []);
-
 	const graph = new Graph();
 
 	const initialState = {

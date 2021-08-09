@@ -8,9 +8,10 @@ import styles from "./DiagramEdge.module.scss";
 
 type DiagramEdgeProps = {
 	edge: GraphEdge;
+	path?: boolean;
 };
 
-function DiagramEdge({ edge }: DiagramEdgeProps) {
+function DiagramEdge({ edge, path = false }: DiagramEdgeProps) {
 	const { dispatch } = useContext(GraphContext);
 
 	function onClick(event: React.MouseEvent) {
@@ -21,7 +22,9 @@ function DiagramEdge({ edge }: DiagramEdgeProps) {
 	 * Overlay line to increase clickable area
 	 */
 	return (
-		<ElementContainer className={styles.edge} onClick={onClick}>
+		<ElementContainer
+			className={`${styles.edge} ${path ? styles.path : ""}`}
+			onClick={onClick}>
 			<line
 				className={styles.overlay}
 				x1={edge.nodes[0].position.x}

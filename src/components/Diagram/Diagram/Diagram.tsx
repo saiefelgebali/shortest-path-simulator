@@ -15,7 +15,11 @@ function Diagram() {
 
 	const Edges = () => {
 		return state.graph.edges.map((edge, index) => (
-			<DiagramEdge edge={edge} key={index} />
+			<DiagramEdge
+				edge={edge}
+				path={state.shortestPath?.path.includes(edge)}
+				key={index}
+			/>
 		));
 	};
 
