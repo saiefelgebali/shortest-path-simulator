@@ -1,10 +1,24 @@
 import { Graph } from "./Graph";
 import { GraphNode } from "./GraphNode";
+import { GraphEdge } from "./GraphEdge";
 import { InMemoryKeyValueStore } from "../util/storage";
 
 export interface ShortestPathResult {
 	distance: number;
-	path: GraphNode[];
+	path: GraphEdge[];
+}
+
+class NodeParents extends InMemoryKeyValueStore<
+	GraphNode,
+	{ node: GraphNode; edge: GraphEdge } | null
+> {
+	/**
+	 * Init a new NodeParents KeyValue store.
+	 * Map out existing nodes with default values of null.
+	 */
+	constructor(nodes: GraphNode[]) {
+		super({ keys: nodes, defaultValue: null });
+	}
 }
 
 class NodeDistances extends InMemoryKeyValueStore<GraphNode, number> {
@@ -46,12 +60,13 @@ export function findShortestPath(
 	// Setup algorithm
 	const distances = new NodeDistances(graph.nodes);
 	const visited: GraphNode[] = [];
-	const parents = new InMemoryKeyValueStore<GraphNode, GraphNode | undefined>(
-		{
-			keys: graph.nodes,
-			defaultValue: undefined,
-		}
-	);
+	const parents = new NodeParents(graph.nodes);
+	// const parents = new InMemoryKeyValueStore<GraphNode, GraphNode | undefined>(
+	// 	{
+	// 		keys: graph.nodes,
+	// 		defaultValue: undefined,
+	// 	}
+	// );
 
 	distances.set(startNode, 0);
 	let current = distances.getShortestDistanceNode(visited);
@@ -75,7 +90,7 @@ export function findShortestPath(
 			if (newDistance < currentDistance) {
 				// Update distance & parent
 				distances.set(child, newDistance);
-				parents.set(child, node ?? undefined);
+				parents.set(child, { node, edge } ?? null);
 			}
 		});
 
@@ -89,10 +104,10 @@ export function findShortestPath(
 	const path = [];
 
 	// Find find path by using parents
-	let parent: GraphNode | undefined = endNode;
+	let parent = parents.get(endNode);
 	while (parent) {
-		path.push(parent);
-		parent = parents.get(parent);
+		path.push(parent.edge);
+		parent = parents.get(parent.node);
 	}
 	path.reverse();
 
