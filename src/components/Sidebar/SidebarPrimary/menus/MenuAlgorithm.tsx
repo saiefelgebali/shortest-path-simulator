@@ -1,13 +1,44 @@
 import React from "react";
 import SidebarMenu from "../../SidebarMenu/SidebarMenu";
-// import styles from "../SidebarPrimary.module.scss";
+import styles from "../SidebarPrimary.module.scss";
 import sidebarStyles from "../../Sidebar.module.scss";
 import { useContext } from "react";
 import { GraphContext } from "../../../../graph/context/graphContext";
 import { findShortestPath } from "../../../../graph/context/graphActions";
 import { SelectNode } from "./SelectNode";
 import { useRef } from "react";
-import { GraphNode } from "../../../../graph";
+import { GraphEdge, GraphNode } from "../../../../graph";
+
+const Edge = ({ edge }: { edge: GraphEdge }) => {
+	return (
+		<div className={styles.edge}>
+			<div>{edge.nodes[0].id}</div>
+			<div>{edge.nodes[1].id}</div>
+		</div>
+	);
+};
+
+const Result = () => {
+	const { state } = useContext(GraphContext);
+
+	if (!state.shortestPath) return null;
+
+	return (
+		<div>
+			<div className={styles.path}>
+				<label className={sidebarStyles.formLabel}>Result</label>
+				<div className={styles.header}>
+					<div>From</div>
+					<div>To</div>
+				</div>
+				{state.shortestPath.path.map((edge, index) => (
+					<Edge edge={edge} key={index} />
+				))}
+			</div>
+			<div>Distance: {state.shortestPath.distance}</div>
+		</div>
+	);
+};
 
 function MenuAlgorithm() {
 	const { state, dispatch } = useContext(GraphContext);
@@ -46,6 +77,7 @@ function MenuAlgorithm() {
 					className={sidebarStyles.formSubmit}>
 					Start
 				</button>
+				<Result />
 			</div>
 		</SidebarMenu>
 	);

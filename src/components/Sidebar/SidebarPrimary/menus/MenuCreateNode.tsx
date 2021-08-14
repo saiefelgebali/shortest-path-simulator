@@ -20,7 +20,7 @@ function MenuCreateNode() {
 		if (!name || !id) return;
 
 		// Create node
-		const node = new GraphNode(name, id);
+		const node = new GraphNode(name, id, { x: 200, y: 200 });
 
 		// Update graph
 		addNode(dispatch, node);
