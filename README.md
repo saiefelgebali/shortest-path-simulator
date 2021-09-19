@@ -8,6 +8,8 @@ I built this using **React** with **TypeScript** and a node module I created cal
 
 ## Demo
 
-Here is a link to the demo video on YouTube. Available at: https://youtu.be/OvJxUA1QJ04
+Here is a demo video of the project running.
 
-[![](http://i3.ytimg.com/vi/OvJxUA1QJ04/maxresdefault.jpg)](https://youtu.be/OvJxUA1QJ04)
+https://user-images.githubusercontent.com/77067634/133920507-87aa74ff-4ee7-47a3-9235-0e88cf9fb946.mp4
+
+In the video, I create a simple graph with 4 nodes and make some connections between them. Then I find the shortest path between RM1 and RM4. The app highlights the shortests path between those two nodes in red. 
