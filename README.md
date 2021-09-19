@@ -1,6 +1,10 @@
 # Shortest Path Simulator
 
+## About
+
 This is a web-based application where users can manipulate graphs, and find the shortest path between any two given nodes.
+
+I built this using **React** with **TypeScript** and a node module I created called [react-diagrams](https://github.com/saiefelgebali/react-diagrams).
 
 ## Demo
 
