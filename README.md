@@ -6,6 +6,8 @@ This is a web-based application where users can manipulate graphs, and find the 
 
 I built this using **React** with **TypeScript** and a node module I created called [react-diagrams](https://github.com/saiefelgebali/react-diagrams).
 
+To find the shortest path, I used Dijkstra's shortest path algorithm; the implementation of which you can see in [algorithms.ts](https://github.com/saiefelgebali/shortest-path-simulator/blob/master/src/graph/algorithm.ts).
+
 ## Demo
 
 Here is a demo video of the project running.
