@@ -48,10 +48,6 @@ class NodeDistances extends InMemoryKeyValueStore<GraphNode, number> {
 	}
 }
 
-// class NodeParents extends InMemoryKeyValueStore<GraphNode, {node: GraphNode, edge: GraphEdge}> {
-
-// }
-
 export function findShortestPath(
 	graph: Graph,
 	startNode: GraphNode,
@@ -61,12 +57,6 @@ export function findShortestPath(
 	const distances = new NodeDistances(graph.nodes);
 	const visited: GraphNode[] = [];
 	const parents = new NodeParents(graph.nodes);
-	// const parents = new InMemoryKeyValueStore<GraphNode, GraphNode | undefined>(
-	// 	{
-	// 		keys: graph.nodes,
-	// 		defaultValue: undefined,
-	// 	}
-	// );
 
 	distances.set(startNode, 0);
 	let current = distances.getShortestDistanceNode(visited);
